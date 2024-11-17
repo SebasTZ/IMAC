@@ -50,3 +50,13 @@ Route::middleware([
         Route::resource('pedidos', PedidoController::class)->only(['index', 'show']); // Permiso de visualización
     });
 });
+
+Route::get('/401', function () {
+    return view('pages.401');
+});
+Route::get('/404', function () {
+    return view('pages.404');
+});
+Route::get('/500', function () {
+    return view('pages.500');
+});
