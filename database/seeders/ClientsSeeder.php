@@ -15,10 +15,11 @@ class ClientsSeeder extends Seeder
             return;
         }
 
-        $clients = [
-            ['name' => 'Cliente 1', 'contact' => '987654321', 'email' => 'cliente1@example.com'],
-            ['name' => 'Cliente 2', 'contact' => '987654322', 'email' => 'cliente2@example.com'],
-            ['name' => 'Cliente 3', 'contact' => '987654323', 'email' => 'cliente3@example.com'],
+        $clients = [ 
+            ['nombre' => 'Cliente 1', 'telefono' => '987654321', 'email' => 'cliente1@example.com'], 
+            ['nombre' => 'Cliente 2', 'telefono' => '987654322', 'email' => 'cliente2@example.com'], 
+            ['nombre' => 'Cliente 3', 'telefono' => '987654323', 'email' => 'cliente3@example.com'],    
+
         ];
 
         foreach ($clients as $client) {

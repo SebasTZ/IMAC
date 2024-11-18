@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\Trabajo; // Add this line to import the Trabajo model
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -10,7 +11,8 @@ class PedidoController extends Controller
     public function index()
     {
         $pedidos = Pedido::all();
-        return view('pedidos.index', compact('pedidos'));
+        $trabajos = Trabajo::all(); // Fetch trabajos
+        return view('pedidos.index', compact('pedidos', 'trabajos')); // Pass trabajos to the view
     }
 
     public function create()
