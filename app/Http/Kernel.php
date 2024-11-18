@@ -64,10 +64,8 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class, // Permiso de rol
-        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class, // Permiso de permiso
-        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class, // Permiso de rol o permiso
-        'role_or_permission_or_verified' => \Spatie\Permission\Middlewares\RoleOrPermissionOrVerifiedMiddleware::class, // Permiso de rol o permiso o verificación de email
-        'role_or_verified' => \Spatie\Permission\Middlewares\RoleOrVerifiedMiddleware::class, // Permiso de rol o verificación de email
+        'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class
     ];
 }
