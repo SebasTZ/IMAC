@@ -31,14 +31,16 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $ventasRole = Role::firstOrCreate(['name' => 'Ventas']);
         $ventasRole->syncPermissions([
+            'ver clientes', 'crear clientes', 'editar clientes',
             'ver pedidos', 'ver trabajos',
             'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales',
         ]);
 
         $tallerRole = Role::firstOrCreate(['name' => 'Taller']);
         $tallerRole->syncPermissions([
-            'ver pedidos', 'editar pedidos',
-            'ver trabajos', 'editar trabajos',
+            'ver clientes', 'crear clientes', 'editar clientes',
+            'ver pedidos','crear pedidos', 'editar pedidos',
+            'ver trabajos', 'crear trabajos', 'editar trabajos',
         ]);
     }
 }

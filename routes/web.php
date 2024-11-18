@@ -28,6 +28,8 @@ Route::middleware([
         Route::resource('clientes', ClienteController::class);  // Gestión de clientes
         Route::resource('pedidos', PedidoController::class);    // Gestión de pedidos
         Route::resource('usuarios', UsuarioController::class);  // Gestión de usuarios (solo administrador)
+        Route::resource('materiales', MaterialController::class); // Gestión de materiales completa
+        Route::resource('trabajos', TrabajoController::class);  // Gestión completa de trabajos
     });
 
     // Rutas accesibles solo para el rol "Ventas"
@@ -35,13 +37,14 @@ Route::middleware([
         Route::get('pedidos', [PedidoController::class, 'index'])->name('pedidos.index');  // Ver pedidos
         Route::get('trabajos', [TrabajoController::class, 'index'])->name('trabajos.index'); // Ver trabajos
         Route::resource('materiales', MaterialController::class)->except(['show']); // Gestión de materiales sin "show"
+        Route::get('materiales/{material}', [MaterialController::class, 'show'])->name('materiales.show'); // Ver material
     });
 
     // Rutas accesibles solo para el rol "Taller"
     Route::middleware(['role:Taller'])->group(function () {
         Route::get('pedidos', [PedidoController::class, 'index'])->name('pedidos.index');  // Ver pedidos
         Route::get('trabajos', [TrabajoController::class, 'index'])->name('trabajos.index'); // Ver trabajos
-        Route::resource('trabajos', TrabajoController::class)->only(['edit', 'update']); // Editar y actualizar trabajos
+        Route::resource('trabajos', TrabajoController::class)->only(['create', 'edit', 'update', 'store', 'index']); // Crear, editar, actualizar, almacenar y ver lista de trabajos
         Route::resource('pedidos', PedidoController::class)->only(['edit', 'update']);    // Editar y actualizar pedidos
     });
 
@@ -60,3 +63,4 @@ Route::get('/404', function () {
 Route::get('/500', function () {
     return view('pages.500');
 });
+

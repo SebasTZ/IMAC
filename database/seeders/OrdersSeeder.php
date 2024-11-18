@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Order;
+use App\Models\Trabajo;
 use App\Models\Cliente;
 
 class OrdersSeeder extends Seeder
@@ -20,7 +20,9 @@ class OrdersSeeder extends Seeder
             ];
 
             foreach ($orders as $order) {
-            \App\Models\Order::create($order);
+
+            \App\Models\Trabajo::create($order);
+
             }
         } else {
             $this->command->warn("No hay suficientes clientes para crear pedidos. Ejecuta ClientsSeeder primero.");
