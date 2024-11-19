@@ -32,7 +32,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $ventasRole = Role::firstOrCreate(['name' => 'Ventas']);
         $ventasRole->syncPermissions([
             'ver clientes', 'crear clientes', 'editar clientes',
-            'ver pedidos', 'ver trabajos',
+            'ver pedidos', 'editar pedidos',
             'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales',
         ]);
 

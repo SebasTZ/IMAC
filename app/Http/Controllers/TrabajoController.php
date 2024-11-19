@@ -25,6 +25,8 @@ class TrabajoController extends Controller
             'descripcion' => 'required|string',
             'estado' => 'required|string|max:50',
             'costo' => 'required|numeric|min:0',
+            'material_purpose' => 'required|string', // New field for material purpose
+            'material_received' => 'required|boolean', // New field for material receipt status
         ]);
 
         Trabajo::create($request->all());
@@ -48,6 +50,8 @@ class TrabajoController extends Controller
             'descripcion' => 'required|string',
             'estado' => 'required|string|max:50',
             'costo' => 'required|numeric|min:0',
+            'material_purpose' => 'required|string', // New field for material purpose
+            'material_received' => 'required|boolean', // New field for material receipt status
         ]);
 
         $trabajo->update($request->all());

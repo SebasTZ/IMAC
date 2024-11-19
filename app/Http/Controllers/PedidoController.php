@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
-use App\Models\Trabajo; // Add this line to import the Trabajo model
+use App\Models\Trabajo; // Correctly import the Trabajo model
+use App\Models\Cliente; // Import the Cliente model
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -23,10 +24,21 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cliente_id' => 'required|exists:clientes,id',
+            'cliente_id' => 'nullable|exists:clientes,id',
+            'cliente_nombre' => 'required_without:cliente_id|string',
+            'cliente_email' => 'required_without:cliente_id|email',
             'descripcion' => 'required|string',
             'estado' => 'required|string|max:50',
         ]);
+
+        // Check if the client is new and create a new client record
+        if (!$request->filled('cliente_id')) {
+            $cliente = Cliente::create([
+                'nombre' => $request->cliente_nombre,
+                'email' => $request->cliente_email,
+            ]);
+            $request->merge(['cliente_id' => $cliente->id]);
+        }
 
         Pedido::create($request->all());
         return redirect()->route('pedidos.index')->with('success', 'Pedido creado exitosamente.');
