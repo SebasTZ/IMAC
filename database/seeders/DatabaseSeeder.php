@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
             MaterialsSeeder::class,
             ClientsSeeder::class,
-            OrdersSeeder::class,
+            PedidosSeeder::class, // Ensure PedidosSeeder is called before TrabajosSeeder
+            TrabajosSeeder::class, // Add TrabajosSeeder here
         ]);
     }
 }

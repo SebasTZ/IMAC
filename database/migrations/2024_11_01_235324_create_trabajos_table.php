@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('trabajos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('pedido_id')->constrained('pedidos')->onDelete('cascade');
+            $table->string('descripcion');
+            $table->string('estado', 50);
+            $table->decimal('costo', 8, 2);
+            $table->string('material_purpose');
+            $table->boolean('material_received');
             $table->timestamps();
         });
     }

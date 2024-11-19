@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('cliente_id')->constrained('clientes')->onDelete('cascade');
+            $table->string('descripcion');
+            $table->string('estado', 50);
             $table->timestamps();
         });
     }
