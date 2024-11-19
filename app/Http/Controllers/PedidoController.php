@@ -46,16 +46,26 @@ class PedidoController extends Controller
 
     public function show(Pedido $pedido)
     {
+        if (is_null($pedido)) {
+            return redirect()->route('pedidos.index')->with('error', 'Pedido no encontrado.');
+        }
         return view('pedidos.show', compact('pedido'));
     }
 
     public function edit(Pedido $pedido)
     {
+        if (is_null($pedido)) {
+            return redirect()->route('pedidos.index')->with('error', 'Pedido no encontrado.');
+        }
         return view('pedidos.edit', compact('pedido'));
     }
 
     public function update(Request $request, Pedido $pedido)
     {
+        if (is_null($pedido)) {
+            return redirect()->route('pedidos.index')->with('error', 'Pedido no encontrado.');
+        }
+
         $request->validate([
             'cliente_id' => 'required|exists:clientes,id',
             'descripcion' => 'required|string',
@@ -68,6 +78,10 @@ class PedidoController extends Controller
 
     public function destroy(Pedido $pedido)
     {
+        if (is_null($pedido)) {
+            return redirect()->route('pedidos.index')->with('error', 'Pedido no encontrado.');
+        }
+
         $pedido->delete();
         return redirect()->route('pedidos.index')->with('success', 'Pedido eliminado exitosamente.');
     }
