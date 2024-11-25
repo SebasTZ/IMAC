@@ -10,31 +10,43 @@ class UsersSeeder extends Seeder
 {
     public function run()
     {
-        // Crear un usuario Administrador
-        $admin = User::firstOrCreate([
-            'email' => 'admin@example.com',
-        ], [
-            'name' => 'Admin',
-            'password' => Hash::make('Admin123'),
-        ]);
+        // Crear o actualizar un usuario Administrador
+        $admin = User::updateOrCreate(
+            [
+                'email' => 'admin@example.com',
+            ],
+            [
+                'name' => 'Admin',
+                'password' => Hash::make('Admin123'),
+                'email_verified_at' => now(),
+            ]
+        );
         $admin->assignRole('Administrador');
 
-        // Crear un usuario para Ventas
-        $ventas = User::firstOrCreate([
-            'email' => 'ventas@example.com',
-        ], [
-            'name' => 'Ventas User',
-            'password' => Hash::make('Ventas123'),
-        ]);
+        // Crear o actualizar un usuario para Ventas
+        $ventas = User::updateOrCreate(
+            [
+                'email' => 'ventas@example.com',
+            ],
+            [
+                'name' => 'Ventas User',
+                'password' => Hash::make('Ventas123'),
+                'email_verified_at' => now(),
+            ]
+        );
         $ventas->assignRole('Ventas');
 
-        // Crear un usuario para Taller
-        $taller = User::firstOrCreate([
-            'email' => 'taller@example.com',
-        ], [
-            'name' => 'Taller User',
-            'password' => Hash::make('Taller123'),
-        ]);
+        // Crear o actualizar un usuario para Taller
+        $taller = User::updateOrCreate(
+            [
+                'email' => 'taller@example.com',
+            ],
+            [
+                'name' => 'Taller User',
+                'password' => Hash::make('Taller123'),
+                'email_verified_at' => now(),
+            ]
+        );
         $taller->assignRole('Taller');
     }
 }

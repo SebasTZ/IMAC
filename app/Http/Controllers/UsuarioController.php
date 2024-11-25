@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:ver usuarios')->only(['index', 'show']);
+        $this->middleware('can:crear usuarios')->only(['create', 'store']);
+        $this->middleware('can:editar usuarios')->only(['edit', 'update']);
+        $this->middleware('can:eliminar usuarios')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -33,15 +41,15 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|exists:roles,name'
+            'role'     => 'required|exists:roles,name',
         ]);
 
         $usuario = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
@@ -73,15 +81,20 @@ class UsuarioController extends Controller
     public function update(Request $request, User $usuario)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $usuario->id,
-            'role' => 'required|exists:roles,name'
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users,email,' . $usuario->id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'role'     => 'required|exists:roles,name',
         ]);
 
-        $usuario->update([
-            'name' => $data['name'],
-            'email' => $data['email'],
-        ]);
+        $usuario->name = $data['name'];
+        $usuario->email = $data['email'];
+
+        if (!empty($data['password'])) {
+            $usuario->password = Hash::make($data['password']);
+        }
+
+        $usuario->save();
 
         $usuario->syncRoles([$data['role']]); // Actualiza el rol del usuario
 

@@ -27,20 +27,12 @@
                     <x-nav-link href="{{ route('trabajos.index') }}" :active="request()->routeIs('trabajos.*')">
                         {{ __('Trabajos') }}
                     </x-nav-link>
-
-                    <!-- Solo visible para el administrador, puedes usar cualquiera de estas opciones -->
-                    @role('Administrador')
+                    <!-- Solo visible para el administrador -->
+                    @role("Administrador")
                         <x-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.*')">
                             {{ __('Usuarios') }}
                         </x-nav-link>
                     @endrole
-
-                    <!-- O bien, para basarse en permisos -->
-                    @can('crear usuarios')
-                        <x-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.*')">
-                            {{ __('Usuarios') }}
-                        </x-nav-link>
-                    @endcan
                 </div>
             </div>
 
@@ -119,7 +111,7 @@
                 {{ __('Trabajos') }}
             </x-responsive-nav-link>
             <!-- Solo visible para el administrador -->
-            @role('Administrador')
+            @role("Administrador")
                 <x-responsive-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.*')">
                     {{ __('Usuarios') }}
                 </x-responsive-nav-link>

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade; // Import Blade facade
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Register the @role directive
+        Blade::directive('role', function ($role) {
+            return "<?php if(auth()->check() && auth()->user()->hasRole('{$role}')): ?>";
+        });
+
+        // Register the @endrole directive
+        Blade::directive('endrole', function () {
+            return '<?php endif; ?>';
+        });
     }
 }

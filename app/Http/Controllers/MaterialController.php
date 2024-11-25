@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class MaterialController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Material::class, 'material');
+    }
+
     public function index()
     {
         $materiales = Material::all();
@@ -22,8 +27,8 @@ class MaterialController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'cantidad' => 'required|integer|min:0',
-            'precio' => 'required|numeric|min:0',
+            'descripcion' => 'nullable|string',
+            'precio' => 'required|numeric',
         ]);
 
         Material::create($request->all());
@@ -44,8 +49,8 @@ class MaterialController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'cantidad' => 'required|integer|min:0',
-            'precio' => 'required|numeric|min:0',
+            'descripcion' => 'nullable|string',
+            'precio' => 'required|numeric',
         ]);
 
         $material->update($request->all());

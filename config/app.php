@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\ServiceProvider;
 
 return [
 
@@ -13,23 +12,23 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'asset_url' => env('ASSET_URL'),
+    'asset_url' => env('ASSET_URL', null),
 
     /*
     |--------------------------------------------------------------------------
-    | Timezone y Locale Configuración
+    | Timezone & Locale Configuration
     |--------------------------------------------------------------------------
-    | Configuración de la zona horaria y el idioma de la aplicación.
+    | Application timezone and locale settings.
     |
     */
 
-    'timezone' => 'America/Lima', // Configura la zona horaria de Lima
+    'timezone' => 'America/Lima', // Configures the Lima timezone
 
-    'locale' => 'es', // Configura el idioma a español
+    'locale' => 'es', // Sets the language to Spanish
 
     'fallback_locale' => 'en',
 
-    'faker_locale' => 'es_PE', // Faker en español peruano
+    'faker_locale' => 'es_PE', // Faker in Peruvian Spanish
 
     'key' => env('APP_KEY'),
 
@@ -43,15 +42,42 @@ return [
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
-    | Aquí se deben agregar los proveedores de servicio, incluido el de Spatie.
+    | Add your service providers here, including Spatie's.
     |
     */
 
-    'providers' => ServiceProvider::defaultProviders()->merge([
+    'providers' => [
+
+        /*
+         * Laravel Framework Service Providers...
+         */
+        Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Broadcasting\BroadcastServiceProvider::class,
+        Illuminate\Bus\BusServiceProvider::class,
+        Illuminate\Cache\CacheServiceProvider::class,
+        Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
+        Illuminate\Cookie\CookieServiceProvider::class,
+        Illuminate\Database\DatabaseServiceProvider::class,
+        Illuminate\Encryption\EncryptionServiceProvider::class,
+        Illuminate\Filesystem\FilesystemServiceProvider::class,
+        Illuminate\Foundation\Providers\FoundationServiceProvider::class,
+        Illuminate\Hashing\HashServiceProvider::class,
+        Illuminate\Mail\MailServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
+        Illuminate\Pagination\PaginationServiceProvider::class,
+        Illuminate\Pipeline\PipelineServiceProvider::class,
+        Illuminate\Queue\QueueServiceProvider::class,
+        Illuminate\Redis\RedisServiceProvider::class,
+        Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
+        Illuminate\Session\SessionServiceProvider::class,
+        Illuminate\Translation\TranslationServiceProvider::class,
+        Illuminate\Validation\ValidationServiceProvider::class,
+        Illuminate\View\ViewServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
-        Spatie\Permission\PermissionServiceProvider::class, // Asegúrate de cargar el proveedor de Spatie
+        Spatie\Permission\PermissionServiceProvider::class, // Ensure Spatie's provider is loaded
 
         /*
          * Application Service Providers...
@@ -63,18 +89,59 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-    ])->toArray(),
+
+    ],
 
     /*
     |--------------------------------------------------------------------------
     | Class Aliases
     |--------------------------------------------------------------------------
-    | Aliases para que Laravel reconozca las clases.
+    | Aliases to recognize the classes.
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
-        // Otros alias aquí si es necesario
-    ])->toArray(),
+    'aliases' => [
+
+        'App'         => Illuminate\Support\Facades\App::class,
+        'Arr'         => Illuminate\Support\Arr::class,
+        'Artisan'     => Illuminate\Support\Facades\Artisan::class,
+        'Auth'        => Illuminate\Support\Facades\Auth::class,
+        'Blade'       => Illuminate\Support\Facades\Blade::class,
+        'Broadcast'   => Illuminate\Support\Facades\Broadcast::class,
+        'Bus'         => Illuminate\Support\Facades\Bus::class,
+        'Cache'       => Illuminate\Support\Facades\Cache::class,
+        'Config'      => Illuminate\Support\Facades\Config::class,
+        'Cookie'      => Illuminate\Support\Facades\Cookie::class,
+        'Crypt'       => Illuminate\Support\Facades\Crypt::class,
+        'DB'          => Illuminate\Support\Facades\DB::class,
+        'Eloquent'    => Illuminate\Database\Eloquent\Model::class,
+        'Event'       => Illuminate\Support\Facades\Event::class,
+        'File'        => Illuminate\Support\Facades\File::class,
+        'Gate'        => Illuminate\Support\Facades\Gate::class,
+        'Hash'        => Illuminate\Support\Facades\Hash::class,
+        'Http'        => Illuminate\Support\Facades\Http::class,
+        'Js'          => Illuminate\Support\Js::class,
+        'Lang'        => Illuminate\Support\Facades\Lang::class,
+        'Log'         => Illuminate\Support\Facades\Log::class,
+        'Mail'        => Illuminate\Support\Facades\Mail::class,
+        'Notification'=> Illuminate\Support\Facades\Notification::class,
+        'Password'    => Illuminate\Support\Facades\Password::class,
+        'Queue'       => Illuminate\Support\Facades\Queue::class,
+        'Redirect'    => Illuminate\Support\Facades\Redirect::class,
+        'Redis'       => Illuminate\Support\Facades\Redis::class,
+        'Request'     => Illuminate\Support\Facades\Request::class,
+        'Response'    => Illuminate\Support\Facades\Response::class,
+        'Route'       => Illuminate\Support\Facades\Route::class,
+        'Schema'      => Illuminate\Support\Facades\Schema::class,
+        'Session'     => Illuminate\Support\Facades\Session::class,
+        'Storage'     => Illuminate\Support\Facades\Storage::class,
+        'Str'         => Illuminate\Support\Str::class,
+        'URL'         => Illuminate\Support\Facades\URL::class,
+        'Validator'   => Illuminate\Support\Facades\Validator::class,
+        'View'        => Illuminate\Support\Facades\View::class,
+
+        // Other aliases here if necessary
+
+    ],
 
 ];

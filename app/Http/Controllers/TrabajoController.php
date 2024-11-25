@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class TrabajoController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Trabajo::class, 'trabajo');
+    }
+
     public function index()
     {
         $trabajos = Trabajo::all();
@@ -21,12 +26,10 @@ class TrabajoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'pedido_id' => 'required|exists:pedidos,id',
+            'pedido_id'   => 'required|exists:pedidos,id',
             'descripcion' => 'required|string',
-            'estado' => 'required|string|max:50',
-            'costo' => 'required|numeric|min:0',
-            'material_purpose' => 'required|string', // New field for material purpose
-            'material_received' => 'required|boolean', // New field for material receipt status
+            'estatus'     => 'required|string',
+            // Agrega aquí otras reglas de validación según los campos del trabajo
         ]);
 
         Trabajo::create($request->all());
@@ -46,12 +49,10 @@ class TrabajoController extends Controller
     public function update(Request $request, Trabajo $trabajo)
     {
         $request->validate([
-            'pedido_id' => 'required|exists:pedidos,id',
+            'pedido_id'   => 'required|exists:pedidos,id',
             'descripcion' => 'required|string',
-            'estado' => 'required|string|max:50',
-            'costo' => 'required|numeric|min:0',
-            'material_purpose' => 'required|string', // New field for material purpose
-            'material_received' => 'required|boolean', // New field for material receipt status
+            'estatus'     => 'required|string',
+            // Agrega aquí otras reglas de validación según los campos del trabajo
         ]);
 
         $trabajo->update($request->all());

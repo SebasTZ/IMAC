@@ -11,7 +11,7 @@ class ClientsSeeder extends Seeder
     public function run()
     {
         if (!Schema::hasTable('clientes')) {
-            $this->command->warn("La tabla 'clients' no existe. Asegúrate de ejecutar las migraciones.");
+            $this->command->warn("La tabla 'clientes' no existe. Asegúrate de ejecutar las migraciones.");
             return;
         }
 
@@ -19,7 +19,6 @@ class ClientsSeeder extends Seeder
             ['nombre' => 'Cliente 1', 'telefono' => '987654321', 'email' => 'cliente1@example.com'], 
             ['nombre' => 'Cliente 2', 'telefono' => '987654322', 'email' => 'cliente2@example.com'], 
             ['nombre' => 'Cliente 3', 'telefono' => '987654323', 'email' => 'cliente3@example.com'],    
-
         ];
 
         foreach ($clients as $client) {
