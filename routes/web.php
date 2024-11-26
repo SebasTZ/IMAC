@@ -24,7 +24,7 @@ Route::middleware([
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Rutas accesibles solo para el rol "Administrador"
-    Route::middleware(['role:"Administrador"'])->group(function () {
+    Route::middleware(['role:Administrador'])->group(function () {
         Route::resource('clientes', ClienteController::class);  // Gestión de clientes
         Route::resource('pedidos', PedidoController::class);    // Gestión de pedidos
         Route::resource('usuarios', UsuarioController::class);  // Gestión de usuarios (solo administrador)
@@ -33,7 +33,7 @@ Route::middleware([
     });
 
     // Rutas accesibles solo para el rol "Ventas"
-    Route::middleware(['role:"Ventas"'])->group(function () {
+    Route::middleware(['role:Ventas'])->group(function () {
         Route::get('pedidos', [PedidoController::class, 'index'])->name('ventas.pedidos.index');  // Ver pedidos
         Route::get('trabajos', [TrabajoController::class, 'index'])->name('ventas.trabajos.index'); // Ver trabajos
         Route::resource('materiales', MaterialController::class)->except(['show']); // Gestión de materiales sin "show"
@@ -41,22 +41,11 @@ Route::middleware([
     });
 
     // Rutas accesibles solo para el rol "Taller"
-    Route::middleware(['role:"Taller"'])->group(function () {
-        Route::get('pedidos', [PedidoController::class, 'index'])->name('taller.pedidos.index');  // Ver pedidos
-        Route::get('trabajos', [TrabajoController::class, 'index'])->name('taller.trabajos.index'); // Ver trabajos
-        Route::resource('trabajos', TrabajoController::class)->only(['create', 'edit', 'update', 'store', 'index']); // Crear, editar, actualizar, almacenar y ver lista de trabajos
+    Route::middleware(['role:Taller'])->group(function () {
         Route::resource('pedidos', PedidoController::class)->only(['edit', 'update'])->names([
-            'edit' => 'taller.pedidos.edit',
-            'update' => 'taller.pedidos.update',
+            'edit' => 'pedidos.edit',
+            'update' => 'pedidos.update',
         ]);    // Editar y actualizar pedidos
-    });
-
-    // Opcional: Rutas comunes para "Administrador" y "Ventas"
-    Route::middleware(['role:"Administrador|Ventas"'])->group(function () {
-        Route::resource('pedidos', PedidoController::class)->only(['index', 'show'])->names([
-            'index' => 'adminventas.pedidos.index',
-            'show' => 'adminventas.pedidos.show',
-        ]); // Permiso de visualización
     });
 
     // Adding the missing route for pedidos.index

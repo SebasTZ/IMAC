@@ -20,6 +20,12 @@ class PedidoController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'cliente_id' => 'required|exists:clientes,id',
+            'descripcion' => 'required|string|max:255',
+            'estado' => 'required|string|max:50',
+        ]);
+
         Pedido::create($request->all());
         return redirect()->route('adminventas.pedidos.index')->with('success', 'Pedido creado exitosamente.');
     }
@@ -36,6 +42,12 @@ class PedidoController extends Controller
 
     public function update(Request $request, Pedido $pedido)
     {
+        $request->validate([
+            'cliente_id' => 'required|exists:clientes,id',
+            'descripcion' => 'required|string|max:255',
+            'estado' => 'required|string|max:50',
+        ]);
+
         $pedido->update($request->all());
         return redirect()->route('adminventas.pedidos.index')->with('success', 'Pedido actualizado exitosamente.');
     }

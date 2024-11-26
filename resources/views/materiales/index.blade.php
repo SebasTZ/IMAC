@@ -28,9 +28,9 @@
                         @foreach ($materiales as $material)
                             <tr class="hover:bg-gray-100">
                                 <td class="border px-4 py-2 text-center">{{ $material->id }}</td>
-                                <td class="border px-4 py-2">{{ $material->nombre }}</td>
-                                <td class="border px-4 py-2">{{ $material->cantidad }}</td>
-                                <td class="border px-4 py-2">{{ $material->precio }}</td>
+                                <td class="border px-4 py-2">{{ $material->name }}</td>
+                                <td class="border px-4 py-2">{{ $material->stock }}</td>
+                                <td class="border px-4 py-2">{{ $material->price }}</td>
                                 <td class="border px-4 py-2 text-center">
                                     <a href="{{ route('materiales.show', $material->id) }}" class="text-blue-500 hover:underline">Ver</a>
                                     

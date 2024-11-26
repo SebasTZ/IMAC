@@ -17,27 +17,18 @@ class UsuarioController extends Controller
         $this->middleware('can:eliminar usuarios')->only('destroy');
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $usuarios = User::all();
         return view('usuarios.index', compact('usuarios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $roles = Role::all(); // Obtener todos los roles disponibles para asignarlos a un usuario
+        $roles = Role::all();
         return view('usuarios.create', compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -53,31 +44,21 @@ class UsuarioController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $usuario->assignRole($data['role']); // Asigna el rol seleccionado
-
+        $usuario->assignRole($data['role']);
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(User $usuario)
     {
         return view('usuarios.show', compact('usuario'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(User $usuario)
     {
-        $roles = Role::all(); // Obtener todos los roles para que puedan ser asignados
+        $roles = Role::all();
         return view('usuarios.edit', compact('usuario', 'roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, User $usuario)
     {
         $data = $request->validate([
@@ -95,15 +76,10 @@ class UsuarioController extends Controller
         }
 
         $usuario->save();
-
-        $usuario->syncRoles([$data['role']]); // Actualiza el rol del usuario
-
+        $usuario->syncRoles([$data['role']]);
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado correctamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(User $usuario)
     {
         $usuario->delete();
