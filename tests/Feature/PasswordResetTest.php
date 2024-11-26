@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Auth\Notifications\ResetPassword;
+use App\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Laravel\Fortify\Features;
@@ -30,9 +30,9 @@ class PasswordResetTest extends TestCase
             $this->markTestSkipped('Password updates are not enabled.');
         }
 
-        Notification::fake();
-
         $user = User::factory()->create();
+
+        Notification::fake();
 
         $response = $this->post('/forgot-password', [
             'email' => $user->email,
@@ -47,11 +47,11 @@ class PasswordResetTest extends TestCase
             $this->markTestSkipped('Password updates are not enabled.');
         }
 
-        Notification::fake();
-
         $user = User::factory()->create();
 
-        $response = $this->post('/forgot-password', [
+        Notification::fake();
+
+        $this->post('/forgot-password', [
             'email' => $user->email,
         ]);
 
@@ -70,11 +70,11 @@ class PasswordResetTest extends TestCase
             $this->markTestSkipped('Password updates are not enabled.');
         }
 
-        Notification::fake();
-
         $user = User::factory()->create();
 
-        $response = $this->post('/forgot-password', [
+        Notification::fake();
+
+        $this->post('/forgot-password', [
             'email' => $user->email,
         ]);
 

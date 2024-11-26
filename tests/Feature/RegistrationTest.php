@@ -40,13 +40,14 @@ class RegistrationTest extends TestCase
             $this->markTestSkipped('Registration support is not enabled.');
         }
 
-        $response = $this->post('/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
-        ]);
+        $response = $this->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class)
+                         ->post('/register', [
+                             'name' => 'Test User',
+                             'email' => 'test@example.com',
+                             'password' => 'password',
+                             'password_confirmation' => 'password',
+                             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+                         ]);
 
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);

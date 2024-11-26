@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Pedido::class, 'pedido');
-    }
-
     public function index()
     {
         $pedidos = Pedido::all();
@@ -25,15 +20,8 @@ class PedidoController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'cliente_id' => 'required|exists:clientes,id',
-            'fecha' => 'required|date',
-            'total' => 'required|numeric',
-            // Agrega aquí otras reglas de validación según los campos del pedido
-        ]);
-
         Pedido::create($request->all());
-        return redirect()->route('pedidos.index')->with('success', 'Pedido creado exitosamente.');
+        return redirect()->route('adminventas.pedidos.index')->with('success', 'Pedido creado exitosamente.');
     }
 
     public function show(Pedido $pedido)
@@ -48,20 +36,13 @@ class PedidoController extends Controller
 
     public function update(Request $request, Pedido $pedido)
     {
-        $request->validate([
-            'cliente_id' => 'required|exists:clientes,id',
-            'fecha' => 'required|date',
-            'total' => 'required|numeric',
-            // Agrega aquí otras reglas de validación según los campos del pedido
-        ]);
-
         $pedido->update($request->all());
-        return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado exitosamente.');
+        return redirect()->route('adminventas.pedidos.index')->with('success', 'Pedido actualizado exitosamente.');
     }
 
     public function destroy(Pedido $pedido)
     {
         $pedido->delete();
-        return redirect()->route('pedidos.index')->with('success', 'Pedido eliminado exitosamente.');
+        return redirect()->route('adminventas.pedidos.index')->with('success', 'Pedido eliminado exitosamente.');
     }
 }
