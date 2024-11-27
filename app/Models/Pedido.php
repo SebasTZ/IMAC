@@ -18,6 +18,7 @@ class Pedido extends Model
         'cliente_id',
         'descripcion',
         'estado',
+        'tipo',
     ];
 
     /**
