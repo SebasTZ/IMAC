@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trabajo;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class TrabajoController extends Controller
@@ -20,16 +21,19 @@ class TrabajoController extends Controller
 
     public function create()
     {
-        return view('trabajos.create');
+        $pedidos = Pedido::all();
+        return view('trabajos.create', compact('pedidos'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'pedido_id'   => 'required|exists:pedidos,id',
-            'descripcion' => 'required|string',
-            'estatus'     => 'required|string',
-            // Agrega aquí otras reglas de validación según los campos del trabajo
+            'pedido_id' => 'required|exists:pedidos,id',
+            'descripcion' => 'required|string|max:255',
+            'estado' => 'required|string|max:50',
+            'costo' => 'required|numeric',
+            'material_purpose' => 'required|string|max:255',
+            'material_received' => 'required|boolean',
         ]);
 
         Trabajo::create($request->all());
@@ -43,16 +47,19 @@ class TrabajoController extends Controller
 
     public function edit(Trabajo $trabajo)
     {
-        return view('trabajos.edit', compact('trabajo'));
+        $pedidos = Pedido::all();
+        return view('trabajos.edit', compact('trabajo', 'pedidos'));
     }
 
     public function update(Request $request, Trabajo $trabajo)
     {
         $request->validate([
-            'pedido_id'   => 'required|exists:pedidos,id',
-            'descripcion' => 'required|string',
-            'estatus'     => 'required|string',
-            // Agrega aquí otras reglas de validación según los campos del trabajo
+            'pedido_id' => 'required|exists:pedidos,id',
+            'descripcion' => 'required|string|max:255',
+            'estado' => 'required|string|max:50',
+            'costo' => 'required|numeric',
+            'material_purpose' => 'required|string|max:255',
+            'material_received' => 'required|boolean',
         ]);
 
         $trabajo->update($request->all());

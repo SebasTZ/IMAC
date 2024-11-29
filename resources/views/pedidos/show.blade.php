@@ -10,10 +10,19 @@
     <div class="py-12 bg-gray-100">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="card">
-                <p><strong>Cliente:</strong> {{ $pedido->cliente->nombre }}</p>
-                <p><strong>Descripción:</strong> {{ $pedido->descripcion }}</p>
-                <p><strong>Estado:</strong> {{ $pedido->estado }}</p>
-                <a href="{{ route('pedidos.index') }}" class="btn">Volver a la lista</a>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Cliente:</label>
+                    <p>{{ $pedido->cliente->nombre }}</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Descripción:</label>
+                    <p>{{ $pedido->descripcion }}</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Estado:</label>
+                    <p>{{ $pedido->estado }}</p>
+                </div>
+                <a href="{{ route('pedidos.index') }}" class="btn btn-primary">Volver a la lista</a>
             </div>
         </div>
     </div>

@@ -13,26 +13,26 @@
                 <form action="{{ route('pedidos.store') }}" method="POST">
                     @csrf
                     <div class="mb-4">
-                        <label for="cliente_id">Cliente</label>
-                        <select id="cliente_id" name="cliente_id" required>
+                        <label for="cliente_id" class="block text-gray-700">Cliente</label>
+                        <select id="cliente_id" name="cliente_id" class="form-select w-full mt-1" required>
                             @foreach ($clientes as $cliente)
                                 <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-4">
-                        <label for="descripcion">Descripción</label>
-                        <textarea id="descripcion" name="descripcion" required></textarea>
+                        <label for="descripcion" class="block text-gray-700">Descripción</label>
+                        <textarea id="descripcion" name="descripcion" class="form-input w-full mt-1" required></textarea>
                     </div>
                     <div class="mb-4">
-                        <label for="estado">Estado</label>
-                        <select id="estado" name="estado" required>
+                        <label for="estado" class="block text-gray-700">Estado</label>
+                        <select id="estado" name="estado" class="form-select w-full mt-1" required>
                             <option value="Pendiente">Pendiente</option>
                             <option value="En Proceso">En Proceso</option>
                             <option value="Completado">Completado</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn">Guardar Pedido</button>
+                    <button type="submit" class="btn btn-primary">Guardar Pedido</button>
                 </form>
             </div>
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -15,7 +16,8 @@ class PedidoController extends Controller
 
     public function create()
     {
-        return view('pedidos.create');
+        $clientes = Cliente::all();
+        return view('pedidos.create', compact('clientes'));
     }
 
     public function store(Request $request)
@@ -27,7 +29,7 @@ class PedidoController extends Controller
         ]);
 
         Pedido::create($request->all());
-        return redirect()->route('adminventas.pedidos.index')->with('success', 'Pedido creado exitosamente.');
+        return redirect()->route('pedidos.index')->with('success', 'Pedido creado exitosamente.');
     }
 
     public function show(Pedido $pedido)
@@ -37,7 +39,8 @@ class PedidoController extends Controller
 
     public function edit(Pedido $pedido)
     {
-        return view('pedidos.edit', compact('pedido'));
+        $clientes = Cliente::all();
+        return view('pedidos.edit', compact('pedido', 'clientes'));
     }
 
     public function update(Request $request, Pedido $pedido)
@@ -49,12 +52,12 @@ class PedidoController extends Controller
         ]);
 
         $pedido->update($request->all());
-        return redirect()->route('adminventas.pedidos.index')->with('success', 'Pedido actualizado exitosamente.');
+        return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado exitosamente.');
     }
 
     public function destroy(Pedido $pedido)
     {
         $pedido->delete();
-        return redirect()->route('adminventas.pedidos.index')->with('success', 'Pedido eliminado exitosamente.');
+        return redirect()->route('pedidos.index')->with('success', 'Pedido eliminado exitosamente.');
     }
 }

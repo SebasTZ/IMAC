@@ -39,7 +39,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $tallerRole = Role::firstOrCreate(['name' => 'Taller']);
         $tallerRole->syncPermissions([
             'ver clientes', 'crear clientes', 'editar clientes',
-            'ver pedidos','crear pedidos', 'editar pedidos',
+            'ver pedidos', 'crear pedidos', 'editar pedidos',
             'ver trabajos', 'crear trabajos', 'editar trabajos',
         ]);
     }

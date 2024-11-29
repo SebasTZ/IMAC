@@ -7,7 +7,7 @@
                 </div>
             @endif
             <div class="mb-4">
-                @role('admin')
+                @role('Administrador')
                     <a href="{{ route('usuarios.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Crear Usuario
                     </a>
@@ -20,7 +20,7 @@
                             <th class="px-4 py-2">Nombre</th>
                             <th class="px-4 py-2">Email</th>
                             <th class="px-4 py-2">Rol</th>
-                            @role('admin')
+                            @role('Administrador')
                                 <th class="px-4 py-2">Acciones</th>
                             @endrole
                         </tr>
@@ -31,7 +31,7 @@
                                 <td class="border px-4 py-2">{{ $usuario->name }}</td>
                                 <td class="border px-4 py-2">{{ $usuario->email }}</td>
                                 <td class="border px-4 py-2">{{ $usuario->roles->pluck('name')->join(', ') }}</td>
-                                @role('admin')
+                                @role('Administrador')
                                     <td class="border px-4 py-2">
                                         <a href="{{ route('usuarios.edit', $usuario) }}" class="btn btn-primary">Editar</a>
                                         <form action="{{ route('usuarios.destroy', $usuario) }}" method="POST" class="inline-block">
