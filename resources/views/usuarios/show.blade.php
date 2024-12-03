@@ -8,9 +8,13 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <p><strong>Nombre:</strong> {{ $usuario->name }}</p>
-                <p><strong>Email:</strong> {{ $usuario->email }}</p>
-                <a href="{{ route('usuarios.index') }}" class="btn btn-secondary mt-4">Volver a la lista</a>
+                @role('Administrador')
+                    <p><strong>Nombre:</strong> {{ $usuario->name }}</p>
+                    <p><strong>Email:</strong> {{ $usuario->email }}</p>
+                    <a href="{{ route('usuarios.index') }}" class="btn btn-secondary mt-4">Volver a la lista</a>
+                @else
+                    <p>No tienes permiso para ver esta información.</p>
+                @endrole
             </div>
         </div>
     </div>

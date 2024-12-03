@@ -37,7 +37,7 @@
                                         <form action="{{ route('usuarios.destroy', $usuario) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</button>
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
                                         </form>
                                     </td>
                                 @endrole

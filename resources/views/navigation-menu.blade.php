@@ -28,11 +28,11 @@
                         {{ __('Trabajos') }}
                     </x-nav-link>
                     <!-- Solo visible para el administrador -->
-                    @role("Administrador")
+                    @can('ver usuarios')
                         <x-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.*')">
                             {{ __('Usuarios') }}
                         </x-nav-link>
-                    @endrole
+                    @endcan
                 </div>
             </div>
 
@@ -110,12 +110,11 @@
             <x-responsive-nav-link href="{{ route('trabajos.index') }}" :active="request()->routeIs('trabajos.*')">
                 {{ __('Trabajos') }}
             </x-responsive-nav-link>
-            <!-- Solo visible para el administrador -->
-            @role("Administrador")
+            @can('ver usuarios')
                 <x-responsive-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.*')">
                     {{ __('Usuarios') }}
                 </x-responsive-nav-link>
-            @endrole
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
