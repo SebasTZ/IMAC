@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                @role('Administrador')
+                @can('crear usuarios')
                     <form action="{{ route('usuarios.store') }}" method="POST">
                         @csrf
                         <div class="mb-4">
@@ -43,7 +43,7 @@
                     </form>
                 @else
                     <p>No tienes permiso para agregar usuarios.</p>
-                @endrole
+                @endcan
             </div>
         </div>
     </div>

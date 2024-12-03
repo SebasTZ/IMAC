@@ -22,13 +22,30 @@ Route::middleware([
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Rutas accesibles solo para el rol "Administrador"
+    // Rutas accesibles solo para el rol "Administrador" con permisos específicos
     Route::middleware(['role:Administrador'])->group(function () {
         Route::resource('clientes', ClienteController::class);
         Route::resource('pedidos', PedidoController::class);
-        Route::resource('usuarios', UsuarioController::class);
         Route::resource('materiales', MaterialController::class);
         Route::resource('trabajos', TrabajoController::class);
+
+        Route::middleware(['permission:ver usuarios'])->group(function () {
+            Route::get('usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+        });
+
+        Route::middleware(['permission:crear usuarios'])->group(function () {
+            Route::get('usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
+            Route::post('usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+        });
+
+        Route::middleware(['permission:editar usuarios'])->group(function () {
+            Route::get('usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+            Route::put('usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
+        });
+
+        Route::middleware(['permission:eliminar usuarios'])->group(function () {
+            Route::delete('usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+        });
     });
 
     // Rutas accesibles solo para el rol "Ventas"
@@ -50,7 +67,6 @@ Route::middleware([
     // Rutas generales
     Route::get('pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
     Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index');
-    Route::get('usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
     Route::get('materiales', [MaterialController::class, 'index'])->name('materiales.index');
     Route::get('trabajos', [TrabajoController::class, 'index'])->name('trabajos.index');
     Route::get('pedidos/{pedido}', [PedidoController::class, 'show'])->name('pedidos.show');

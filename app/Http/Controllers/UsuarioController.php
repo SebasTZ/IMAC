@@ -19,7 +19,7 @@ class UsuarioController extends Controller
 
     public function index()
     {
-        $usuarios = User::all();
+        $usuarios = User::with('roles')->get();
         return view('usuarios.index', compact('usuarios'));
     }
 
@@ -45,12 +45,8 @@ class UsuarioController extends Controller
         ]);
 
         $usuario->assignRole($data['role']);
-        return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
-    }
 
-    public function show(User $usuario)
-    {
-        return view('usuarios.show', compact('usuario'));
+        return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');
     }
 
     public function edit(User $usuario)
@@ -68,21 +64,20 @@ class UsuarioController extends Controller
             'role'     => 'required|exists:roles,name',
         ]);
 
-        $usuario->name = $data['name'];
-        $usuario->email = $data['email'];
+        $usuario->update([
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'password' => $data['password'] ? Hash::make($data['password']) : $usuario->password,
+        ]);
 
-        if (!empty($data['password'])) {
-            $usuario->password = Hash::make($data['password']);
-        }
+        $usuario->syncRoles($data['role']);
 
-        $usuario->save();
-        $usuario->syncRoles([$data['role']]);
-        return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado correctamente.');
+        return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
     }
 
     public function destroy(User $usuario)
     {
         $usuario->delete();
-        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado correctamente.');
+        return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente.');
     }
 }

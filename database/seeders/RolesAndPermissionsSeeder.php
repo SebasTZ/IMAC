@@ -30,17 +30,13 @@ class RolesAndPermissionsSeeder extends Seeder
         $adminRole->givePermissionTo(Permission::all());
 
         $ventasRole = Role::firstOrCreate(['name' => 'Ventas']);
-        $ventasRole->syncPermissions([
-            'ver clientes', 'crear clientes', 'editar clientes',
-            'ver pedidos', 'editar pedidos',
-            'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales',
+        $ventasRole->givePermissionTo([
+            'ver clientes', 'ver pedidos', 'ver materiales', 'ver trabajos'
         ]);
 
         $tallerRole = Role::firstOrCreate(['name' => 'Taller']);
-        $tallerRole->syncPermissions([
-            'ver clientes', 'crear clientes', 'editar clientes',
-            'ver pedidos', 'crear pedidos', 'editar pedidos',
-            'ver trabajos', 'crear trabajos', 'editar trabajos',
+        $tallerRole->givePermissionTo([
+            'ver pedidos', 'editar pedidos'
         ]);
     }
 }
