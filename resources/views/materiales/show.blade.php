@@ -1,5 +1,3 @@
-{{-- resources/views/materiales/show.blade.php --}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -11,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="card">
                 <p><strong>Nombre:</strong> {{ $material->nombre }}</p>
-                <p><strong>Cantidad:</strong> {{ $material->cantidad }}</p>
+                <p><strong>Cantidad:</strong> {{ $material->stock }}</p>
                 <p><strong>Precio:</strong> {{ $material->precio }}</p>
                 <a href="{{ route('materiales.index') }}" class="btn">Volver a la lista</a>
             </div>

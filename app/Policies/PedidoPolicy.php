@@ -31,4 +31,9 @@ class PedidoPolicy
     {
         return $user->can('eliminar pedidos');
     }
+
+    public function report(User $user)
+    {
+        return $user->can('reporte pedidos');
+    }
 }

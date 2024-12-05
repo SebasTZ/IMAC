@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre'); // Añadido el campo 'nombre'
+            $table->string('nombre');
+            $table->string('telefono');
             $table->string('email')->unique();
-            $table->string('telefono'); // Añadido el campo 'telefono'
             $table->timestamps();
         });
     }

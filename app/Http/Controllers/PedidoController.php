@@ -26,6 +26,8 @@ class PedidoController extends Controller
             'cliente_id' => 'required|exists:clientes,id',
             'descripcion' => 'required|string|max:255',
             'estado' => 'required|string|max:50',
+            'material_purpose' => 'nullable|string|max:255', // Validar material_purpose
+            'material_requested' => 'required|boolean', // Validar material_requested
         ]);
 
         Pedido::create($request->all());
@@ -39,6 +41,7 @@ class PedidoController extends Controller
 
     public function edit(Pedido $pedido)
     {
+        $this->authorize('update', $pedido);
         $clientes = Cliente::all();
         return view('pedidos.edit', compact('pedido', 'clientes'));
     }
@@ -49,6 +52,8 @@ class PedidoController extends Controller
             'cliente_id' => 'required|exists:clientes,id',
             'descripcion' => 'required|string|max:255',
             'estado' => 'required|string|max:50',
+            'material_purpose' => 'nullable|string|max:255', // Validar material_purpose
+            'material_requested' => 'required|boolean', // Validar material_requested
         ]);
 
         $pedido->update($request->all());

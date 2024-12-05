@@ -31,4 +31,9 @@ class TrabajoPolicy
     {
         return $user->can('eliminar trabajos');
     }
+
+    public function report(User $user)
+    {
+        return $user->can('reporte trabajos');
+    }
 }

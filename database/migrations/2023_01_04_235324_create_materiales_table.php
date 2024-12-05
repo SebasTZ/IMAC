@@ -4,21 +4,27 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMaterialesTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('nombre')->unique(); // Asegúrate de que esta columna exista
             $table->integer('stock');
-            $table->decimal('price', 8, 2);
+            $table->decimal('precio', 8, 2);
             $table->timestamps();
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('materials');
     }
-}
+};

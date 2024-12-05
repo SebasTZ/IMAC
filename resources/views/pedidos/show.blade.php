@@ -22,6 +22,14 @@
                     <label class="block text-gray-700">Estado:</label>
                     <p>{{ $pedido->estado }}</p>
                 </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Propósito del Material:</label>
+                    <p>{{ $pedido->material_purpose }}</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Material Solicitado:</label>
+                    <p>{{ $pedido->material_requested ? 'Sí' : 'No' }}</p>
+                </div>
                 <a href="{{ route('pedidos.index') }}" class="btn btn-primary">Volver a la lista</a>
             </div>
         </div>

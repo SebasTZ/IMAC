@@ -1,5 +1,3 @@
-{{-- resources/views/materiales/create.blade.php --}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -17,8 +15,8 @@
                         <input type="text" id="nombre" name="nombre" required>
                     </div>
                     <div class="mb-4">
-                        <label for="cantidad">Cantidad</label>
-                        <input type="number" id="cantidad" name="cantidad" required min="0">
+                        <label for="stock">Cantidad</label>
+                        <input type="number" id="stock" name="stock" required min="0">
                     </div>
                     <div class="mb-4">
                         <label for="precio">Precio</label>

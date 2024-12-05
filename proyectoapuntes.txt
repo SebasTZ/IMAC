@@ -19,6 +19,8 @@ php artisan serve
 
 php artisan key:generate 
 php artisan test
+php artisan migrate
+php artisan db:seed
 
 composer dump-autoload A veces, Laravel necesita refrescar el autoloader de Composer para reconocer nuevas clases o middlewares. 
 php artisan migrate Verificar la migración de permisos y roles

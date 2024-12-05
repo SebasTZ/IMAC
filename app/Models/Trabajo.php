@@ -1,4 +1,5 @@
 <?php
+// Trabajo.php
 
 namespace App\Models;
 
@@ -9,25 +10,24 @@ class Trabajo extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'pedido_id',
+        'cliente_id',
         'descripcion',
         'estado',
         'costo',
         'material_purpose',
         'material_received',
+        'tipo_comprobante', // Nuevo campo
     ];
 
-    /**
-     * Get the pedido associated with the trabajo.
-     */
     public function pedido()
     {
         return $this->belongsTo(Pedido::class);
+    }
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
     }
 }

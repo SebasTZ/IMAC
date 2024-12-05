@@ -7,6 +7,9 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\TrabajoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsuarioController;
+use App\Exports\TrabajosExport;
+use App\Exports\PedidosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 // Ruta principal redirige al login
 Route::get('/', function () {
@@ -69,6 +72,12 @@ Route::middleware([
     Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index');
     Route::get('materiales', [MaterialController::class, 'index'])->name('materiales.index');
     Route::get('trabajos', [TrabajoController::class, 'index'])->name('trabajos.index');
+    Route::get('trabajos/export', function () {
+        return Excel::download(new TrabajosExport, 'trabajos.xlsx');
+    })->name('trabajos.export');
+    Route::get('pedidos/export', function () {
+        return Excel::download(new PedidosExport, 'pedidos.xlsx');
+    })->name('pedidos.export');
     Route::get('pedidos/{pedido}', [PedidoController::class, 'show'])->name('pedidos.show');
 });
 

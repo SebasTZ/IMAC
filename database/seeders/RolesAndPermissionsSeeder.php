@@ -15,9 +15,9 @@ class RolesAndPermissionsSeeder extends Seeder
         // Define permisos
         $permissions = [
             'ver clientes', 'crear clientes', 'editar clientes', 'eliminar clientes',
-            'ver pedidos', 'crear pedidos', 'editar pedidos', 'eliminar pedidos',
+            'ver pedidos', 'crear pedidos', 'editar pedidos', 'eliminar pedidos', 'reporte pedidos',
             'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales',
-            'ver trabajos', 'crear trabajos', 'editar trabajos', 'eliminar trabajos',
+            'ver trabajos', 'crear trabajos', 'editar trabajos', 'eliminar trabajos', 'reporte trabajos',
             'ver usuarios', 'crear usuarios', 'editar usuarios', 'eliminar usuarios',
         ];
 
@@ -31,12 +31,18 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $ventasRole = Role::firstOrCreate(['name' => 'Ventas']);
         $ventasRole->givePermissionTo([
-            'ver clientes', 'ver pedidos', 'ver materiales', 'ver trabajos'
+            'ver clientes', 'crear clientes', 'editar clientes',
+            'ver pedidos','editar pedidos', 'reporte pedidos',
+            'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales',
+            'ver trabajos', 'editar trabajos' , 'reporte trabajos'
         ]);
 
         $tallerRole = Role::firstOrCreate(['name' => 'Taller']);
         $tallerRole->givePermissionTo([
-            'ver pedidos', 'editar pedidos'
+            'ver clientes', 'crear clientes', 'editar clientes',
+            'ver pedidos', 'crear pedidos','editar pedidos', 'reporte pedidos',
+            'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales',
+            'ver trabajos','crear trabajos' , 'editar trabajos' , 'reporte trabajos'
         ]);
     }
 }

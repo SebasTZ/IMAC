@@ -1,5 +1,3 @@
-{{-- resources/views/trabajos/edit.blade.php --}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -22,6 +20,14 @@
                         </select>
                     </div>
                     <div class="mb-4">
+                        <label for="cliente_id">Cliente</label>
+                        <select id="cliente_id" name="cliente_id" required>
+                            @foreach ($clientes as $cliente)
+                                <option value="{{ $cliente->id }}" {{ $trabajo->cliente_id == $cliente->id ? 'selected' : '' }}>{{ $cliente->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
                         <label for="descripcion">Descripción</label>
                         <textarea id="descripcion" name="descripcion" required>{{ $trabajo->descripcion }}</textarea>
                     </div>
@@ -36,6 +42,13 @@
                     <div class="mb-4">
                         <label for="costo">Costo</label>
                         <input type="number" step="0.01" id="costo" name="costo" value="{{ $trabajo->costo }}" required min="0">
+                    </div>
+                    <div class="mb-4">
+                        <label for="tipo_comprobante">Tipo de Comprobante</label>
+                        <select id="tipo_comprobante" name="tipo_comprobante" required>
+                            <option value="Boleta" {{ $trabajo->tipo_comprobante == 'Boleta' ? 'selected' : '' }}>Boleta</option>
+                            <option value="Factura" {{ $trabajo->tipo_comprobante == 'Factura' ? 'selected' : '' }}>Factura</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn">Actualizar Trabajo</button>
                 </form>

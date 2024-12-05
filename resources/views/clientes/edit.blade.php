@@ -16,12 +16,12 @@
                         <input type="text" id="nombre" name="nombre" value="{{ $cliente->nombre }}" required>
                     </div>
                     <div class="mb-4">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="{{ $cliente->email }}" required>
-                    </div>
-                    <div class="mb-4">
                         <label for="telefono">Teléfono</label>
                         <input type="text" id="telefono" name="telefono" value="{{ $cliente->telefono }}" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="{{ $cliente->email }}" required>
                     </div>
                     <button type="submit" class="btn">Actualizar Cliente</button>
                 </form>

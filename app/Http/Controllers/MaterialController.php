@@ -26,9 +26,9 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255',
-            'descripcion' => 'nullable|string',
-            'precio' => 'required|numeric',
+            'nombre' => 'required|string|max:255', // Cambiado de 'name' a 'nombre'
+            'stock' => 'required|integer|min:0',
+            'precio' => 'required|numeric|min:0', // Cambiado de 'price' a 'precio'
         ]);
 
         Material::create($request->all());
@@ -48,9 +48,9 @@ class MaterialController extends Controller
     public function update(Request $request, Material $material)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255',
-            'descripcion' => 'nullable|string',
-            'precio' => 'required|numeric',
+            'nombre' => 'required|string|max:255', // Cambiado de 'name' a 'nombre'
+            'stock' => 'required|integer|min:0',
+            'precio' => 'required|numeric|min:0', // Cambiado de 'price' a 'precio'
         ]);
 
         $material->update($request->all());

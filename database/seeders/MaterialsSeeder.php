@@ -10,14 +10,14 @@ class MaterialsSeeder extends Seeder
     public function run()
     {
         $materials = [
-            ['name' => 'Tornillo', 'stock' => 100, 'price' => 0.5],
-            ['name' => 'Tuerca', 'stock' => 200, 'price' => 0.3],
-            ['name' => 'Arandela', 'stock' => 150, 'price' => 0.1],
-            ['name' => 'Aceite para máquinas', 'stock' => 50, 'price' => 10],
+            ['nombre' => 'Tornillo', 'stock' => 100, 'precio' => 0.5],
+            ['nombre' => 'Tuerca', 'stock' => 200, 'precio' => 0.3],
+            ['nombre' => 'Arandela', 'stock' => 150, 'precio' => 0.1],
+            ['nombre' => 'Aceite para máquinas', 'stock' => 50, 'precio' => 10],
         ];
 
         foreach ($materials as $material) {
-            Material::firstOrCreate(['name' => $material['name']], $material);
+            Material::firstOrCreate(['nombre' => $material['nombre']], $material);
         }
     }
 }

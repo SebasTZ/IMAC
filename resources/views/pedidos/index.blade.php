@@ -18,6 +18,7 @@
                 <div class="mb-4">
                     <a href="{{ route('pedidos.create') }}" class="btn btn-primary">Agregar Nuevo Pedido</a>
                 </div>
+                <a href="{{ route('pedidos.export') }}" class="btn mb-3">Exportar a Excel</a>
                 <table class="table-auto w-full">
                     <thead>
                         <tr>
@@ -25,6 +26,8 @@
                             <th class="px-4 py-2">Cliente</th>
                             <th class="px-4 py-2">Descripción</th>
                             <th class="px-4 py-2">Estado</th>
+                            <th class="px-4 py-2">Propósito del Material</th>
+                            <th class="px-4 py-2">Material Solicitado</th>
                             <th class="px-4 py-2">Acciones</th>
                         </tr>
                     </thead>
@@ -35,6 +38,8 @@
                                 <td class="border px-4 py-2">{{ $pedido->cliente->nombre }}</td>
                                 <td class="border px-4 py-2">{{ $pedido->descripcion }}</td>
                                 <td class="border px-4 py-2">{{ $pedido->estado }}</td>
+                                <td class="border px-4 py-2">{{ $pedido->material_purpose }}</td>
+                                <td class="border px-4 py-2">{{ $pedido->material_requested ? 'Sí' : 'No' }}</td>
                                 <td class="border px-4 py-2">
                                     <a href="{{ route('pedidos.show', $pedido) }}" class="btn btn-info">Ver</a>
                                     <a href="{{ route('pedidos.edit', $pedido) }}" class="btn btn-primary">Editar</a>

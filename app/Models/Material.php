@@ -15,8 +15,8 @@ class Material extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nombre', // Cambiado de 'name' a 'nombre'
         'stock',
-        'price',
+        'precio', // Cambiado de 'price' a 'precio'
     ];
 }

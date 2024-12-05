@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Trabajo;
+use App\Models\Pedido;
 use App\Models\Cliente;
 
 class OrdersSeeder extends Seeder
@@ -14,13 +14,13 @@ class OrdersSeeder extends Seeder
 
         if ($clients->count() >= 3) {
             $orders = [
-                ['client_id' => $clients[0]->id, 'descripcion' => 'Reparación de motor', 'status' => 'pendiente', 'total' => 150],
-                ['client_id' => $clients[1]->id, 'descripcion' => 'Mantenimiento preventivo', 'status' => 'en proceso', 'total' => 100],
-                ['client_id' => $clients[2]->id, 'descripcion' => 'Cambio de piezas', 'status' => 'completado', 'total' => 200],
+                ['cliente_id' => $clients[0]->id, 'descripcion' => 'Reparación de motor', 'estado' => 'pendiente', 'material_purpose' => 'Reparación', 'material_requested' => true],
+                ['cliente_id' => $clients[1]->id, 'descripcion' => 'Mantenimiento preventivo', 'estado' => 'en proceso', 'material_purpose' => 'Mantenimiento', 'material_requested' => false],
+                ['cliente_id' => $clients[2]->id, 'descripcion' => 'Cambio de piezas', 'estado' => 'completado', 'material_purpose' => 'Reemplazo', 'material_requested' => true],
             ];
 
             foreach ($orders as $order) {
-                \App\Models\Trabajo::create($order);
+                Pedido::create($order);
             }
         } else {
             $this->command->warn("No hay suficientes clientes para crear pedidos. Ejecuta ClientsSeeder primero.");

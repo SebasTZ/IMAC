@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Trabajo;
 use App\Models\Pedido;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class TrabajoController extends Controller
@@ -22,18 +23,21 @@ class TrabajoController extends Controller
     public function create()
     {
         $pedidos = Pedido::all();
-        return view('trabajos.create', compact('pedidos'));
+        $clientes = Cliente::all(); // Obtener clientes
+        return view('trabajos.create', compact('pedidos', 'clientes'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'pedido_id' => 'required|exists:pedidos,id',
+            'cliente_id' => 'required|exists:clientes,id', // Validar cliente
             'descripcion' => 'required|string|max:255',
             'estado' => 'required|string|max:50',
             'costo' => 'required|numeric',
             'material_purpose' => 'required|string|max:255',
             'material_received' => 'required|boolean',
+            'tipo_comprobante' => 'required|string|max:50', // Validar tipo de comprobante
         ]);
 
         Trabajo::create($request->all());
@@ -48,18 +52,21 @@ class TrabajoController extends Controller
     public function edit(Trabajo $trabajo)
     {
         $pedidos = Pedido::all();
-        return view('trabajos.edit', compact('trabajo', 'pedidos'));
+        $clientes = Cliente::all(); // Obtener clientes
+        return view('trabajos.edit', compact('trabajo', 'pedidos', 'clientes'));
     }
 
     public function update(Request $request, Trabajo $trabajo)
     {
         $request->validate([
             'pedido_id' => 'required|exists:pedidos,id',
+            'cliente_id' => 'required|exists:clientes,id', // Validar cliente
             'descripcion' => 'required|string|max:255',
             'estado' => 'required|string|max:50',
             'costo' => 'required|numeric',
             'material_purpose' => 'required|string|max:255',
             'material_received' => 'required|boolean',
+            'tipo_comprobante' => 'required|string|max:50', // Validar tipo de comprobante
         ]);
 
         $trabajo->update($request->all());

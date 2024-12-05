@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Cliente::class, 'cliente');
-    }
-
     public function index()
     {
         $clientes = Cliente::all();
@@ -27,8 +22,8 @@ class ClienteController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'email' => 'required|email|unique:clientes',
             'telefono' => 'required|string|max:15',
+            'email' => 'required|string|email|max:255|unique:clientes',
         ]);
 
         Cliente::create($request->all());
@@ -49,8 +44,8 @@ class ClienteController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'email' => 'required|email|unique:clientes,email,' . $cliente->id,
             'telefono' => 'required|string|max:15',
+            'email' => 'required|string|email|max:255|unique:clientes,email,' . $cliente->id,
         ]);
 
         $cliente->update($request->all());

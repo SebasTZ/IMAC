@@ -32,6 +32,17 @@
                             <option value="Completado">Completado</option>
                         </select>
                     </div>
+                    <div class="mb-4">
+                        <label for="material_purpose" class="block text-gray-700">Propósito del Material</label>
+                        <input type="text" id="material_purpose" name="material_purpose" class="form-input w-full mt-1">
+                    </div>
+                    <div class="mb-4">
+                        <label for="material_requested" class="block text-gray-700">Material Solicitado</label>
+                        <select id="material_requested" name="material_requested" class="form-select w-full mt-1" required>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Guardar Pedido</button>
                 </form>
             </div>

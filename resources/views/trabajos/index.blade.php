@@ -1,5 +1,3 @@
-{{-- resources/views/trabajos/index.blade.php --}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -14,11 +12,14 @@
                     <a href="{{ route('trabajos.create') }}" class="btn mb-3">Agregar Trabajo</a>
                 @endcan
 
+                <a href="{{ route('trabajos.export') }}" class="btn mb-3">Exportar a Excel</a>
+
                 <table class="table-auto w-full border-collapse">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="px-4 py-2 border">ID</th>
                             <th class="px-4 py-2 border">Pedido</th>
+                            <th class="px-4 py-2 border">Cliente</th>
                             <th class="px-4 py-2 border">Descripción</th>
                             <th class="px-4 py-2 border">Estado</th>
                             <th class="px-4 py-2 border">Costo</th>
@@ -30,6 +31,7 @@
                             <tr class="hover:bg-gray-100">
                                 <td class="border px-4 py-2 text-center">{{ $trabajo->id }}</td>
                                 <td class="border px-4 py-2">{{ $trabajo->pedido->descripcion }}</td>
+                                <td class="border px-4 py-2">{{ $trabajo->cliente->nombre }}</td>
                                 <td class="border px-4 py-2">{{ $trabajo->descripcion }}</td>
                                 <td class="border px-4 py-2">{{ ucfirst($trabajo->estado) }}</td>
                                 <td class="border px-4 py-2">{{ number_format($trabajo->costo, 2) }}</td>
@@ -60,4 +62,3 @@
         </div>
     </div>
 </x-app-layout>
-</write_to_file>

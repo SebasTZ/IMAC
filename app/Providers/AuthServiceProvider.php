@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Models\Cliente;
 use App\Models\Pedido;
 use App\Models\Material;
@@ -11,7 +10,7 @@ use App\Policies\ClientePolicy;
 use App\Policies\PedidoPolicy;
 use App\Policies\MaterialPolicy;
 use App\Policies\TrabajoPolicy;
-
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
