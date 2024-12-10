@@ -31,13 +31,14 @@ class RolesAndPermissionsSeeder extends Seeder
             'Administrador' => Permission::all(),
             'Ventas' => [
                 'ver clientes', 'crear clientes', 'editar clientes',
-                'ver pedidos', 'crear pedidos', 'editar pedidos', 'reporte pedidos',
+                'ver pedidos', 'editar pedidos', 'reporte pedidos',
                 'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales',
-                'ver trabajos', 'crear trabajos', 'editar trabajos', 'reporte trabajos'
+                'ver trabajos', 'editar trabajos', 'reporte trabajos'
             ],
             'Taller' => [
-                'ver pedidos', 'editar pedidos', 'reporte pedidos',
-                'ver trabajos', 'editar trabajos', 'reporte trabajos',
+                'ver clientes', 'crear clientes', 'editar clientes',
+                'ver pedidos','crear pedidos', 'editar pedidos', 'reporte pedidos',
+                'ver trabajos','crear trabajos', 'editar trabajos', 'reporte trabajos',
             ],
         ];
 
