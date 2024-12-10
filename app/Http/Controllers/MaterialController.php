@@ -12,9 +12,15 @@ class MaterialController extends Controller
         $this->authorizeResource(Material::class, 'material');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $materiales = Material::all();
+        $search = $request->input('search');
+        $materiales = Material::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('nombre', 'like', "%{$search}%");
+            })
+            ->get();
+
         return view('materiales.index', compact('materiales'));
     }
 
@@ -26,9 +32,9 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255', // Cambiado de 'name' a 'nombre'
+            'nombre' => 'required|string|max:255',
             'stock' => 'required|integer|min:0',
-            'precio' => 'required|numeric|min:0', // Cambiado de 'price' a 'precio'
+            'precio' => 'required|numeric|min:0',
         ]);
 
         Material::create($request->all());
@@ -48,9 +54,9 @@ class MaterialController extends Controller
     public function update(Request $request, Material $material)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255', // Cambiado de 'name' a 'nombre'
+            'nombre' => 'required|string|max:255',
             'stock' => 'required|integer|min:0',
-            'precio' => 'required|numeric|min:0', // Cambiado de 'price' a 'precio'
+            'precio' => 'required|numeric|min:0',
         ]);
 
         $material->update($request->all());

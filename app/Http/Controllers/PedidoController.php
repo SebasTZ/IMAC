@@ -3,34 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
-use App\Models\Cliente;
+use App\Models\Material;
 use Illuminate\Http\Request;
+use App\Exports\PedidosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PedidoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pedidos = Pedido::all();
+        $search = $request->input('search');
+        $pedidos = Pedido::with('material')
+            ->when($search, function ($query, $search) {
+                return $query->whereHas('material', function ($query) use ($search) {
+                    $query->where('nombre', 'like', "%{$search}%");
+                });
+            })
+            ->get();
+
         return view('pedidos.index', compact('pedidos'));
     }
 
     public function create()
     {
-        $clientes = Cliente::all();
-        return view('pedidos.create', compact('clientes'));
+        $materiales = Material::all();
+        return view('pedidos.create', compact('materiales'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'cliente_id' => 'required|exists:clientes,id',
-            'descripcion' => 'required|string|max:255',
+            'material_id' => 'required|exists:materials,id',
             'estado' => 'required|string|max:50',
-            'material_purpose' => 'nullable|string|max:255', // Validar material_purpose
-            'material_requested' => 'required|boolean', // Validar material_requested
+            'material_purpose' => 'required|string|max:255',
+            'material_requested' => 'required|boolean',
         ]);
 
-        Pedido::create($request->all());
+        $pedido = Pedido::create($request->all());
+
+        // Disminuir el stock del material si el pedido está completado
+        if ($request->estado == 'Completado') {
+            $material = Material::find($request->material_id);
+            $material->stock -= 1; // Ajusta la cantidad según sea necesario
+            $material->save();
+        }
+
         return redirect()->route('pedidos.index')->with('success', 'Pedido creado exitosamente.');
     }
 
@@ -41,22 +58,28 @@ class PedidoController extends Controller
 
     public function edit(Pedido $pedido)
     {
-        $this->authorize('update', $pedido);
-        $clientes = Cliente::all();
-        return view('pedidos.edit', compact('pedido', 'clientes'));
+        $materiales = Material::all();
+        return view('pedidos.edit', compact('pedido', 'materiales'));
     }
 
     public function update(Request $request, Pedido $pedido)
     {
         $request->validate([
-            'cliente_id' => 'required|exists:clientes,id',
-            'descripcion' => 'required|string|max:255',
+            'material_id' => 'required|exists:materials,id',
             'estado' => 'required|string|max:50',
-            'material_purpose' => 'nullable|string|max:255', // Validar material_purpose
-            'material_requested' => 'required|boolean', // Validar material_requested
+            'material_purpose' => 'required|string|max:255',
+            'material_requested' => 'required|boolean',
         ]);
 
         $pedido->update($request->all());
+
+        // Disminuir el stock del material si el pedido está completado
+        if ($request->estado == 'Completado') {
+            $material = Material::find($request->material_id);
+            $material->stock -= 1; // Ajusta la cantidad según sea necesario
+            $material->save();
+        }
+
         return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado exitosamente.');
     }
 
@@ -64,5 +87,11 @@ class PedidoController extends Controller
     {
         $pedido->delete();
         return redirect()->route('pedidos.index')->with('success', 'Pedido eliminado exitosamente.');
+    }
+
+    public function export()
+    {
+        $this->authorize('report', Pedido::class);
+        return Excel::download(new PedidosExport, 'pedidos.xlsx');
     }
 }

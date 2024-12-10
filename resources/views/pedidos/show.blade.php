@@ -11,12 +11,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="card">
                 <div class="mb-4">
-                    <label class="block text-gray-700">Cliente:</label>
-                    <p>{{ $pedido->cliente->nombre }}</p>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700">Descripción:</label>
-                    <p>{{ $pedido->descripcion }}</p>
+                    <label class="block text-gray-700">Material:</label>
+                    <p>{{ $pedido->material->nombre }}</p>
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700">Estado:</label>

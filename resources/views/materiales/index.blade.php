@@ -12,6 +12,11 @@
                     <a href="{{ route('materiales.create') }}" class="btn mb-3">Agregar Material</a>
                 @endcan
 
+                <form method="GET" action="{{ route('materiales.index') }}" class="mb-4">
+                    <input type="text" name="search" placeholder="Buscar material..." class="form-input w-full" value="{{ request('search') }}">
+                    <button type="submit" class="btn mt-2">Buscar</button>
+                </form>
+
                 <table class="table-auto w-full border-collapse">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -48,6 +53,10 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                @if($materiales->isEmpty())
+                    <p class="text-center mt-4">No hay materiales disponibles.</p>
+                @endif
             </div>
         </div>
     </div>

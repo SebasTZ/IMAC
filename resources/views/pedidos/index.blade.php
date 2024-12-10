@@ -1,5 +1,3 @@
-{{-- resources/views/pedidos/index.blade.php --}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -18,13 +16,16 @@
                 <div class="mb-4">
                     <a href="{{ route('pedidos.create') }}" class="btn btn-primary">Agregar Nuevo Pedido</a>
                 </div>
+                <form method="GET" action="{{ route('pedidos.index') }}" class="mb-4">
+                    <input type="text" name="search" placeholder="Buscar material..." class="form-input w-full" value="{{ request('search') }}">
+                    <button type="submit" class="btn mt-2">Buscar</button>
+                </form>
                 <a href="{{ route('pedidos.export') }}" class="btn mb-3">Exportar a Excel</a>
                 <table class="table-auto w-full">
                     <thead>
                         <tr>
                             <th class="px-4 py-2">ID</th>
-                            <th class="px-4 py-2">Cliente</th>
-                            <th class="px-4 py-2">Descripción</th>
+                            <th class="px-4 py-2">Material</th>
                             <th class="px-4 py-2">Estado</th>
                             <th class="px-4 py-2">Propósito del Material</th>
                             <th class="px-4 py-2">Material Solicitado</th>
@@ -35,8 +36,7 @@
                         @foreach ($pedidos as $pedido)
                             <tr>
                                 <td class="border px-4 py-2">{{ $pedido->id }}</td>
-                                <td class="border px-4 py-2">{{ $pedido->cliente->nombre }}</td>
-                                <td class="border px-4 py-2">{{ $pedido->descripcion }}</td>
+                                <td class="border px-4 py-2">{{ $pedido->material ? $pedido->material->nombre : 'N/A' }}</td>
                                 <td class="border px-4 py-2">{{ $pedido->estado }}</td>
                                 <td class="border px-4 py-2">{{ $pedido->material_purpose }}</td>
                                 <td class="border px-4 py-2">{{ $pedido->material_requested ? 'Sí' : 'No' }}</td>

@@ -8,11 +8,10 @@
     <div class="py-12 bg-gray-100">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="card">
-                <p><strong>Pedido:</strong> {{ $trabajo->pedido->descripcion }}</p>
                 <p><strong>Cliente:</strong> {{ $trabajo->cliente->nombre }}</p>
                 <p><strong>Descripción:</strong> {{ $trabajo->descripcion }}</p>
-                <p><strong>Estado:</strong> {{ $trabajo->estado }}</p>
-                <p><strong>Costo:</strong> {{ $trabajo->costo }}</p>
+                <p><strong>Estado:</strong> {{ ucfirst($trabajo->estado) }}</p>
+                <p><strong>Costo:</strong> {{ number_format($trabajo->costo, 2) }}</p>
                 <p><strong>Tipo de Comprobante:</strong> {{ $trabajo->tipo_comprobante }}</p>
                 <a href="{{ route('trabajos.index') }}" class="btn">Volver a la lista</a>
             </div>

@@ -11,20 +11,13 @@
                 <form action="{{ route('trabajos.store') }}" method="POST">
                     @csrf
                     <div class="mb-4">
-                        <label for="pedido_id">Pedido</label>
-                        <select id="pedido_id" name="pedido_id" required>
-                            @foreach ($pedidos as $pedido)
-                                <option value="{{ $pedido->id }}">{{ $pedido->descripcion }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-4">
                         <label for="cliente_id">Cliente</label>
                         <select id="cliente_id" name="cliente_id" required>
                             @foreach ($clientes as $cliente)
                                 <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
                             @endforeach
                         </select>
+                        <a href="{{ route('clientes.create') }}" class="btn btn-secondary mt-2">Agregar Nuevo Cliente</a>
                     </div>
                     <div class="mb-4">
                         <label for="descripcion">Descripción</label>
@@ -45,6 +38,7 @@
                     <div class="mb-4">
                         <label for="tipo_comprobante">Tipo de Comprobante</label>
                         <select id="tipo_comprobante" name="tipo_comprobante" required>
+                            <option value="Ninguno">Ninguno</option>
                             <option value="Boleta">Boleta</option>
                             <option value="Factura">Factura</option>
                         </select>

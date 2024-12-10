@@ -4,9 +4,19 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Material;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MaterialPolicy
 {
+    use HandlesAuthorization;
+
+    public function before(User $user, $ability)
+    {
+        if ($user->hasRole('Administrador')) {
+            return true; // Permitir todo al administrador
+        }
+    }
+
     public function viewAny(User $user)
     {
         return $user->can('ver materiales');

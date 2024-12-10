@@ -10,20 +10,14 @@ class Pedido extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cliente_id',
-        'descripcion',
+        'material_id',
         'estado',
-        'material_purpose', // Nuevo campo
-        'material_requested', // Nuevo campo
+        'material_purpose',
+        'material_requested',
     ];
 
-    public function trabajos()
+    public function material()
     {
-        return $this->hasMany(Trabajo::class);
-    }
-
-    public function cliente()
-    {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Material::class);
     }
 }

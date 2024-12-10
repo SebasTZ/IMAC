@@ -5,18 +5,53 @@ namespace App\Exports;
 use App\Models\Trabajo;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class TrabajosExport implements FromCollection, WithHeadings
+class TrabajosExport implements FromCollection, WithHeadings, WithMapping
 {
+    /**
+    * @return \Illuminate\Support\Collection
+    */
     public function collection()
     {
-        return Trabajo::all();
+        return Trabajo::with('cliente')->get();
     }
 
+    /**
+     * @return array
+     */
     public function headings(): array
     {
         return [
-            'ID', 'Pedido ID', 'Cliente ID', 'Descripción', 'Estado', 'Costo', 'Material Purpose', 'Material Received', 'Tipo Comprobante', 'Created At', 'Updated At'
+            'ID',
+            'Cliente',
+            'Descripción',
+            'Estado',
+            'Costo',
+            'Propósito del Material',
+            'Material Recibido',
+            'Tipo de Comprobante',
+            'Fecha de Creación',
+            'Fecha de Actualización',
+        ];
+    }
+
+    /**
+     * @var Trabajo $trabajo
+     */
+    public function map($trabajo): array
+    {
+        return [
+            $trabajo->id,
+            $trabajo->cliente ? $trabajo->cliente->nombre : 'N/A',
+            $trabajo->descripcion,
+            ucfirst($trabajo->estado),
+            number_format($trabajo->costo, 2),
+            $trabajo->material_purpose,
+            $trabajo->material_received ? 'Sí' : 'No',
+            $trabajo->tipo_comprobante,
+            $trabajo->created_at->format('Y-m-d H:i:s'),
+            $trabajo->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

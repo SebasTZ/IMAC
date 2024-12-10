@@ -4,28 +4,26 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Pedido;
+use App\Models\Material;
 
 class PedidosSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        Pedido::create([
-            'cliente_id' => 1, // Assuming a cliente with ID 1 exists
-            'descripcion' => 'Pedido de ejemplo 1',
-            'estado' => 'pendiente',
-            'material_purpose' => 'Construcción',
-            'material_requested' => true,
-        ]);
+        $materials = Material::all();
 
-        Pedido::create([
-            'cliente_id' => 2, // Assuming a cliente with ID 2 exists
-            'descripcion' => 'Pedido de ejemplo 2',
-            'estado' => 'completado',
-            'material_purpose' => 'Reparación',
-            'material_requested' => false,
-        ]);
+        if ($materials->count() >= 3) {
+            $orders = [
+                ['material_id' => $materials[0]->id, 'estado' => 'pendiente', 'material_purpose' => 'Reparación', 'material_requested' => true],
+                ['material_id' => $materials[1]->id, 'estado' => 'en proceso', 'material_purpose' => 'Mantenimiento', 'material_requested' => false],
+                ['material_id' => $materials[2]->id, 'estado' => 'completado', 'material_purpose' => 'Reemplazo', 'material_requested' => true],
+            ];
+
+            foreach ($orders as $order) {
+                Pedido::create($order);
+            }
+        } else {
+            $this->command->warn("No hay suficientes materiales para crear pedidos. Ejecuta MaterialsSeeder primero.");
+        }
     }
 }

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Cliente; // Asegúrate de usar el modelo correcto
+use App\Models\Cliente;
 use Illuminate\Support\Facades\Schema;
 
 class ClientsSeeder extends Seeder
@@ -15,10 +15,10 @@ class ClientsSeeder extends Seeder
             return;
         }
 
-        $clients = [ 
-            ['nombre' => 'Cliente 1', 'telefono' => '987654321', 'email' => 'cliente1@example.com'], 
-            ['nombre' => 'Cliente 2', 'telefono' => '987654322', 'email' => 'cliente2@example.com'], 
-            ['nombre' => 'Cliente 3', 'telefono' => '987654323', 'email' => 'cliente3@example.com'],    
+        $clients = [
+            ['nombre' => 'Cliente 1', 'telefono' => '987654321', 'email' => 'cliente1@example.com'],
+            ['nombre' => 'Cliente 2', 'telefono' => '987654322', 'email' => 'cliente2@example.com'],
+            ['nombre' => 'Cliente 3', 'telefono' => '987654323', 'email' => 'cliente3@example.com'],
         ];
 
         foreach ($clients as $client) {

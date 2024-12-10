@@ -25,6 +25,7 @@ php artisan db:seed
 composer dump-autoload A veces, Laravel necesita refrescar el autoloader de Composer para reconocer nuevas clases o middlewares. 
 php artisan migrate Verificar la migración de permisos y roles
 php artisan db:seed --class=RolesAndPermissionsSeeder asegúrate de que el usuario administrador tenga los permisos necesarios
+php artisan route:list Verificar la ruta principal y las rutas protegidas con autenticación
 
 USUARIOS:
 Ventas ventas@example.com IMAC2024

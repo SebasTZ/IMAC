@@ -7,6 +7,13 @@ use App\Models\Cliente;
 
 class ClientePolicy
 {
+    public function before(User $user, $ability)
+    {
+        if ($user->hasRole('Administrador')) {
+            return true; // Permitir todo al administrador
+        }
+    }
+
     public function viewAny(User $user)
     {
         return $user->can('ver clientes');

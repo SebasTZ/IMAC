@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trabajo;
-use App\Models\Pedido;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use App\Exports\TrabajosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TrabajoController extends Controller
 {
@@ -16,28 +17,24 @@ class TrabajoController extends Controller
 
     public function index()
     {
-        $trabajos = Trabajo::all();
+        $trabajos = Trabajo::with('cliente')->get();
         return view('trabajos.index', compact('trabajos'));
     }
 
     public function create()
     {
-        $pedidos = Pedido::all();
-        $clientes = Cliente::all(); // Obtener clientes
-        return view('trabajos.create', compact('pedidos', 'clientes'));
+        $clientes = Cliente::all();
+        return view('trabajos.create', compact('clientes'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'pedido_id' => 'required|exists:pedidos,id',
-            'cliente_id' => 'required|exists:clientes,id', // Validar cliente
+            'cliente_id' => 'required|exists:clientes,id',
             'descripcion' => 'required|string|max:255',
             'estado' => 'required|string|max:50',
-            'costo' => 'required|numeric',
-            'material_purpose' => 'required|string|max:255',
-            'material_received' => 'required|boolean',
-            'tipo_comprobante' => 'required|string|max:50', // Validar tipo de comprobante
+            'costo' => 'required|numeric|min:0',
+            'tipo_comprobante' => 'required|string|max:50',
         ]);
 
         Trabajo::create($request->all());
@@ -51,22 +48,18 @@ class TrabajoController extends Controller
 
     public function edit(Trabajo $trabajo)
     {
-        $pedidos = Pedido::all();
-        $clientes = Cliente::all(); // Obtener clientes
-        return view('trabajos.edit', compact('trabajo', 'pedidos', 'clientes'));
+        $clientes = Cliente::all();
+        return view('trabajos.edit', compact('trabajo', 'clientes'));
     }
 
     public function update(Request $request, Trabajo $trabajo)
     {
         $request->validate([
-            'pedido_id' => 'required|exists:pedidos,id',
-            'cliente_id' => 'required|exists:clientes,id', // Validar cliente
+            'cliente_id' => 'required|exists:clientes,id',
             'descripcion' => 'required|string|max:255',
             'estado' => 'required|string|max:50',
-            'costo' => 'required|numeric',
-            'material_purpose' => 'required|string|max:255',
-            'material_received' => 'required|boolean',
-            'tipo_comprobante' => 'required|string|max:50', // Validar tipo de comprobante
+            'costo' => 'required|numeric|min:0',
+            'tipo_comprobante' => 'required|string|max:50',
         ]);
 
         $trabajo->update($request->all());
@@ -77,5 +70,11 @@ class TrabajoController extends Controller
     {
         $trabajo->delete();
         return redirect()->route('trabajos.index')->with('success', 'Trabajo eliminado exitosamente.');
+    }
+
+    public function export()
+    {
+        $this->authorize('report', Trabajo::class);
+        return Excel::download(new TrabajosExport, 'trabajos.xlsx');
     }
 }

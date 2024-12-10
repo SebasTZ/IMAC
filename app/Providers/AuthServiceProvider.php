@@ -11,6 +11,8 @@ use App\Policies\PedidoPolicy;
 use App\Policies\MaterialPolicy;
 use App\Policies\TrabajoPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -31,5 +33,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
+
+        // Definir permisos adicionales si es necesario
+        Gate::define('manage-users', function ($user) {
+            return $user->hasRole('Administrador');
+        });
     }
 }
