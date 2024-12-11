@@ -94,4 +94,4 @@ class PedidoController extends Controller
         $this->authorize('report', Pedido::class);
         return Excel::download(new PedidosExport, 'pedidos.xlsx');
     }
-}
+}   

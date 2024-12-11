@@ -10,8 +10,8 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 class PedidosExport implements FromCollection, WithHeadings, WithMapping
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return Pedido::with('material')->get();
