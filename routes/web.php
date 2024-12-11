@@ -60,7 +60,7 @@ Route::middleware([
     });
 
     // Rutas accesibles solo para el rol "Taller"
-    Route::middleware(['role:Taller'])->group(function () {
+    Route::middleware(['role:Administrador|Taller'])->group(function () {
         Route::resource('pedidos', PedidoController::class)->only(['edit', 'update'])->names([
             'edit' => 'pedidos.edit',
             'update' => 'pedidos.update',
