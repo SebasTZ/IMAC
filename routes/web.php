@@ -21,6 +21,9 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('pedidos/export', [PedidoController::class, 'export'])->name('pedidos.export');
+    Route::get('trabajos/export', [TrabajoController::class, 'export'])->name('trabajos.export');
+
 
     // Rutas accesibles solo para el rol "Administrador" con permisos específicos
     Route::middleware(['role:Administrador'])->group(function () {
@@ -48,8 +51,8 @@ Route::middleware([
         });
     });
 
-    // Rutas accesibles solo para el rol "Ventas"
-    Route::middleware(['role:Ventas'])->group(function () {
+    // Rutas accesibles para los roles "Administrador" y "Ventas"
+    Route::middleware(['role:Administrador|Ventas'])->group(function () {
         Route::get('pedidos', [PedidoController::class, 'index'])->name('ventas.pedidos.index');
         Route::get('trabajos', [TrabajoController::class, 'index'])->name('ventas.trabajos.index');
         Route::resource('materiales', MaterialController::class)->except(['show']);
@@ -69,10 +72,6 @@ Route::middleware([
     Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index');
     Route::get('materiales', [MaterialController::class, 'index'])->name('materiales.index');
     Route::get('trabajos', [TrabajoController::class, 'index'])->name('trabajos.index');
-    
-    Route::get('trabajos/export', [TrabajoController::class, 'export'])->name('trabajos.export');
-    Route::get('pedidos/export', [PedidoController::class, 'export'])->name('pedidos.export');
-    
     Route::get('pedidos/{pedido}', [PedidoController::class, 'show'])->name('pedidos.show');
 });
 
