@@ -44,6 +44,17 @@
                             <option value="Factura" {{ $trabajo->tipo_comprobante == 'Factura' ? 'selected' : '' }}>Factura</option>
                         </select>
                     </div>
+                    <div class="mb-4">
+                        <label for="material_purpose">Propósito del Material</label>
+                        <input type="text" id="material_purpose" name="material_purpose" value="{{ $trabajo->material_purpose }}" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="material_received">Material Recibido</label>
+                        <select id="material_received" name="material_received" required>
+                            <option value="1" {{ $trabajo->material_received ? 'selected' : '' }}>Sí</option>
+                            <option value="0" {{ !$trabajo->material_received ? 'selected' : '' }}>No</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn">Actualizar Trabajo</button>
                 </form>
             </div>

@@ -72,6 +72,7 @@ Route::middleware([
     //     ]);
     // });
 
+
     // Rutas generales
     Route::get('pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
     Route::get('trabajos', [TrabajoController::class, 'index'])->name('trabajos.index');

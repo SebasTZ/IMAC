@@ -35,6 +35,8 @@ class TrabajoController extends Controller
             'estado' => 'required|string|max:50',
             'costo' => 'required|numeric|min:0',
             'tipo_comprobante' => 'required|string|max:50',
+            'material_purpose' => 'required|string|max:255',
+            'material_received' => 'required|boolean',
         ]);
 
         Trabajo::create($request->all());
@@ -60,6 +62,8 @@ class TrabajoController extends Controller
             'estado' => 'required|string|max:50',
             'costo' => 'required|numeric|min:0',
             'tipo_comprobante' => 'required|string|max:50',
+            'material_purpose' => 'required|string|max:255',
+            'material_received' => 'required|boolean',
         ]);
 
         $trabajo->update($request->all());
