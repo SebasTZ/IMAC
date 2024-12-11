@@ -36,9 +36,9 @@
                                 <td class="border px-4 py-2">{{ $material->precio }}</td>
                                 <td class="border px-4 py-2 text-center">
                                     <a href="{{ route('materiales.show', $material->id) }}" class="text-blue-500 hover:underline">Ver</a>
-                                    
+
                                     @can('editar materiales')
-                                        <a href="{{ route('materiales.edit', $material->id) }}" class="text-yellow-500 hover:underline ml-2">Editar</a>
+                                        <a href="{{ route('materiales.edit', $material) }}" class="text-yellow-500 hover:underline ml-2">Editar</a>
                                     @endcan
 
                                     @can('eliminar materiales')
