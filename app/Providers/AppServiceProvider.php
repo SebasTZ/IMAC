@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade; // Import Blade facade
+use Illuminate\Support\Facades\Gate;
+use App\Models\Material;
+use App\Policies\MaterialPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,5 +32,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('endrole', function () {
             return '<?php endif; ?>';
         });
+
+        Gate::policy(Material::class, MaterialPolicy::class);
+
     }
 }

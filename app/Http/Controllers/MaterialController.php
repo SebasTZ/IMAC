@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Material;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class MaterialController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Material::class, 'material');
-    }
+    use AuthorizesRequests;
 
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Material::class);
         $search = $request->input('search');
         $materiales = Material::query()
             ->when($search, function ($query, $search) {
@@ -26,11 +25,13 @@ class MaterialController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Material::class);
         return view('materiales.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Material::class);
         $request->validate([
             'nombre' => 'required|string|max:255',
             'stock' => 'required|integer|min:0',
@@ -43,16 +44,21 @@ class MaterialController extends Controller
 
     public function show(Material $material)
     {
+        $this->authorize('view', $material);
         return view('materiales.show', compact('material'));
     }
 
-    public function edit(Material $material)
+    public function edit(string $id)
     {
+        $material = Material::findOrFail($id);
+        $this->authorize('update', $material);
         return view('materiales.edit', compact('material'));
     }
 
-    public function update(Request $request, Material $material)
+    public function update(Request $request, string $id)
     {
+        $material = Material::find($id);
+        $this->authorize('update', $material);
         $request->validate([
             'nombre' => 'required|string|max:255',
             'stock' => 'required|integer|min:0',
@@ -63,8 +69,10 @@ class MaterialController extends Controller
         return redirect()->route('materiales.index')->with('success', 'Material actualizado exitosamente.');
     }
 
-    public function destroy(Material $material)
+    public function destroy($id)
     {
+        $material = Material::find($id);
+        $this->authorize('delete', $material);
         $material->delete();
         return redirect()->route('materiales.index')->with('success', 'Material eliminado exitosamente.');
     }
