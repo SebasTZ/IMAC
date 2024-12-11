@@ -43,6 +43,17 @@
                             <option value="Factura">Factura</option>
                         </select>
                     </div>
+                    <div class="mb-4">
+                        <label for="material_purpose">Propósito del Material</label>
+                        <input type="text" id="material_purpose" name="material_purpose" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="material_received">Material Recibido</label>
+                        <select id="material_received" name="material_received" required>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn">Guardar Trabajo</button>
                 </form>
             </div>

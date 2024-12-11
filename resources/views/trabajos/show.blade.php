@@ -13,6 +13,8 @@
                 <p><strong>Estado:</strong> {{ ucfirst($trabajo->estado) }}</p>
                 <p><strong>Costo:</strong> {{ number_format($trabajo->costo, 2) }}</p>
                 <p><strong>Tipo de Comprobante:</strong> {{ $trabajo->tipo_comprobante }}</p>
+                <p><strong>Propósito del Material:</strong> {{ $trabajo->material_purpose }}</p>
+                <p><strong>Material Recibido:</strong> {{ $trabajo->material_received ? 'Sí' : 'No' }}</p>
                 <a href="{{ route('trabajos.index') }}" class="btn">Volver a la lista</a>
             </div>
         </div>
