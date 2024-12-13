@@ -33,7 +33,16 @@
                                 <td class="border px-4 py-2 text-center">{{ $trabajo->id }}</td>
                                 <td class="border px-4 py-2">{{ $trabajo->cliente->nombre }}</td>
                                 <td class="border px-4 py-2">{{ $trabajo->descripcion }}</td>
-                                <td class="border px-4 py-2">{{ ucfirst($trabajo->estado) }}</td>
+                                <td class="border px-4 py-2 text-center">
+                                    <span class="
+                                        @if ($trabajo->estado === 'Pendiente') bg-yellow-200 text-yellow-700
+                                        @elseif ($trabajo->estado === 'En Proceso') bg-blue-200 text-blue-700
+                                        @else bg-green-200 text-green-700
+                                        @endif
+                                        px-2 py-1 rounded">
+                                        {{ ucfirst($trabajo->estado) }}
+                                    </span>
+                                </td>
                                 <td class="border px-4 py-2">{{ number_format($trabajo->costo, 2) }}</td>
                                 <td class="border px-4 py-2 text-center">
                                     <a href="{{ route('trabajos.show', $trabajo->id) }}" class="text-blue-500 hover:underline">Ver</a>

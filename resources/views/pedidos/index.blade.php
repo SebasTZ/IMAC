@@ -37,7 +37,16 @@
                             <tr>
                                 <td class="border px-4 py-2">{{ $pedido->id }}</td>
                                 <td class="border px-4 py-2">{{ $pedido->material ? $pedido->material->nombre : 'N/A' }}</td>
-                                <td class="border px-4 py-2">{{ $pedido->estado }}</td>
+                                <td class="border px-4 py-2 text-center">
+                                    <span class="
+                                        @if ($pedido->estado === 'Pendiente') bg-yellow-200 text-yellow-700
+                                        @elseif ($pedido->estado === 'En Proceso') bg-blue-200 text-blue-700
+                                        @else bg-green-200 text-green-700
+                                        @endif
+                                        px-2 py-1 rounded">
+                                        {{ ucfirst($pedido->estado) }}
+                                    </span>
+                                </td>
                                 <td class="border px-4 py-2">{{ $pedido->material_purpose }}</td>
                                 <td class="border px-4 py-2">{{ $pedido->material_requested ? 'Sí' : 'No' }}</td>
                                 <td class="border px-4 py-2">
