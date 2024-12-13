@@ -23,6 +23,17 @@
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" value="{{ $cliente->email }}" required>
                     </div>
+                    <div class="mb-4">
+                        <label for="tipo_documento">Tipo de Documento</label>
+                        <select id="tipo_documento" name="tipo_documento" required>
+                            <option value="DNI" {{ $cliente->tipo_documento == 'DNI' ? 'selected' : '' }}>DNI</option>
+                            <option value="RUC" {{ $cliente->tipo_documento == 'RUC' ? 'selected' : '' }}>RUC</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="numero_documento">Número de Documento</label>
+                        <input type="text" id="numero_documento" name="numero_documento" value="{{ $cliente->numero_documento }}" required>
+                    </div>
                     <button type="submit" class="btn">Actualizar Cliente</button>
                 </form>
             </div>

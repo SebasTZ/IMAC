@@ -25,6 +25,8 @@
                             <th class="px-4 py-2">Nombre</th>
                             <th class="px-4 py-2">Teléfono</th>
                             <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2">Tipo de Documento</th>
+                            <th class="px-4 py-2">Número de Documento</th>
                             <th class="px-4 py-2">Acciones</th>
                         </tr>
                     </thead>
@@ -35,16 +37,16 @@
                                 <td class="border px-4 py-2">{{ $cliente->nombre }}</td>
                                 <td class="border px-4 py-2">{{ $cliente->telefono }}</td>
                                 <td class="border px-4 py-2">{{ $cliente->email }}</td>
+                                <td class="border px-4 py-2">{{ $cliente->tipo_documento }}</td>
+                                <td class="border px-4 py-2">{{ $cliente->numero_documento }}</td>
                                 <td class="border px-4 py-2">
                                     <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-info">Ver</a>
                                     <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-primary">Editar</a>
                                     @can('eliminar clientes')
-                                        <form action="{{ route('clientes.destroy', $cliente) }}" method="POST"
-                                            class="inline-block">
+                                        <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('¿Estás seguro de eliminar este cliente?')">Eliminar</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este cliente?')">Eliminar</button>
                                         </form>
                                     @endcan
                                 </td>

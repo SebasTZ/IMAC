@@ -9,14 +9,20 @@ class Material extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'nombre', // Cambiado de 'name' a 'nombre'
+        'nombre',
+        'codigo_material',
+        'categoria',
         'stock',
-        'precio', // Cambiado de 'price' a 'precio'
+        'precio',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($material) {
+            $material->codigo_material = 'MAT-' . str_pad(Material::max('id') + 1, 4, '0', STR_PAD_LEFT);
+        });
+    }
 }

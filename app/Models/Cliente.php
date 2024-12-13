@@ -13,6 +13,8 @@ class Cliente extends Model
         'nombre',
         'telefono',
         'email',
+        'tipo_documento',
+        'numero_documento',
     ];
 }
 

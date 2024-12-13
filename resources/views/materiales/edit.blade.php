@@ -16,6 +16,10 @@
                         <input type="text" id="nombre" name="nombre" value="{{ $material->nombre }}" required>
                     </div>
                     <div class="mb-4">
+                        <label for="categoria">Categoría</label>
+                        <input type="text" id="categoria" name="categoria" value="{{ $material->categoria }}">
+                    </div>
+                    <div class="mb-4">
                         <label for="stock">Cantidad</label>
                         <input type="number" id="stock" name="stock" value="{{ $material->stock }}" required min="0">
                     </div>

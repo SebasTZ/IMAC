@@ -11,6 +11,8 @@
                 <p><strong>Nombre:</strong> {{ $cliente->nombre }}</p>
                 <p><strong>Teléfono:</strong> {{ $cliente->telefono }}</p>
                 <p><strong>Email:</strong> {{ $cliente->email }}</p>
+                <p><strong>Tipo de Documento:</strong> {{ $cliente->tipo_documento }}</p>
+                <p><strong>Número de Documento:</strong> {{ $cliente->numero_documento }}</p>
                 <a href="{{ route('clientes.index') }}" class="btn">Volver a la lista</a>
             </div>
         </div>

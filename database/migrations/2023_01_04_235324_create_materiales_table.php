@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->unique(); // Asegúrate de que esta columna exista
+            $table->string('nombre')->unique();
+            $table->string('codigo_material')->unique();
+            $table->string('categoria')->nullable();
             $table->integer('stock');
             $table->decimal('precio', 8, 2);
             $table->timestamps();

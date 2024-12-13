@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('telefono');
             $table->string('email')->unique();
+            $table->string('tipo_documento');
+            $table->string('numero_documento')->unique();
             $table->timestamps();
         });
     }

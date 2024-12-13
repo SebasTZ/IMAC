@@ -22,6 +22,17 @@
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" required>
                     </div>
+                    <div class="mb-4">
+                        <label for="tipo_documento">Tipo de Documento</label>
+                        <select id="tipo_documento" name="tipo_documento" required>
+                            <option value="DNI">DNI</option>
+                            <option value="RUC">RUC</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="numero_documento">Número de Documento</label>
+                        <input type="text" id="numero_documento" name="numero_documento" required>
+                    </div>
                     <button type="submit" class="btn">Guardar Cliente</button>
                 </form>
             </div>

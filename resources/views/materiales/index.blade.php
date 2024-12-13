@@ -22,6 +22,8 @@
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="px-4 py-2 border">ID</th>
                             <th class="px-4 py-2 border">Nombre</th>
+                            <th class="px-4 py-2 border">Código</th>
+                            <th class="px-4 py-2 border">Categoría</th>
                             <th class="px-4 py-2 border">Cantidad</th>
                             <th class="px-4 py-2 border">Precio</th>
                             <th class="px-4 py-2 border">Acciones</th>
@@ -32,6 +34,8 @@
                             <tr class="hover:bg-gray-100">
                                 <td class="border px-4 py-2 text-center">{{ $material->id }}</td>
                                 <td class="border px-4 py-2">{{ $material->nombre }}</td>
+                                <td class="border px-4 py-2">{{ $material->codigo_material }}</td>
+                                <td class="border px-4 py-2">{{ $material->categoria }}</td>
                                 <td class="border px-4 py-2">{{ $material->stock }}</td>
                                 <td class="border px-4 py-2">{{ $material->precio }}</td>
                                 <td class="border px-4 py-2 text-center">

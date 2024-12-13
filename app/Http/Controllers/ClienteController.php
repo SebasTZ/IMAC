@@ -24,6 +24,8 @@ class ClienteController extends Controller
             'nombre' => 'required|string|max:255',
             'telefono' => 'required|string|max:15',
             'email' => 'required|string|email|max:255|unique:clientes',
+            'tipo_documento' => 'required|in:DNI,RUC',
+            'numero_documento' => 'required|numeric|digits_between:8,11|unique:clientes,numero_documento',
         ]);
 
         Cliente::create($request->all());
@@ -46,6 +48,8 @@ class ClienteController extends Controller
             'nombre' => 'required|string|max:255',
             'telefono' => 'required|string|max:15',
             'email' => 'required|string|email|max:255|unique:clientes,email,' . $cliente->id,
+            'tipo_documento' => 'required|in:DNI,RUC',
+            'numero_documento' => 'required|numeric|digits_between:8,11|unique:clientes,numero_documento,' . $cliente->id,
         ]);
 
         $cliente->update($request->all());

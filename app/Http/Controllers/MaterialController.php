@@ -34,6 +34,7 @@ class MaterialController extends Controller
         $this->authorize('create', Material::class);
         $request->validate([
             'nombre' => 'required|string|max:255',
+            'categoria' => 'nullable|string|max:255',
             'stock' => 'required|integer|min:0',
             'precio' => 'required|numeric|min:0',
         ]);
@@ -61,6 +62,7 @@ class MaterialController extends Controller
         $this->authorize('update', $material);
         $request->validate([
             'nombre' => 'required|string|max:255',
+            'categoria' => 'nullable|string|max:255',
             'stock' => 'required|integer|min:0',
             'precio' => 'required|numeric|min:0',
         ]);
