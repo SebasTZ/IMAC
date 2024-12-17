@@ -30,6 +30,7 @@ Route::middleware([
     Route::resource('clientes', ClienteController::class);
     Route::resource('pedidos', PedidoController::class);
     Route::resource('materiales', MaterialController::class);
+    Route::post('materiales/{material}/addStock', [MaterialController::class, 'addStock'])->name('materiales.addStock');
     Route::resource('trabajos', TrabajoController::class)->except('index');
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('pedidos', PedidoController::class)->except('index');
