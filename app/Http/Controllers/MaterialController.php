@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Material;
-use App\Models\MaterialBatch;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -40,14 +39,8 @@ class MaterialController extends Controller
             'precio' => 'required|numeric|min:0',
         ]);
 
-        $material = Material::firstOrCreate(
-            ['nombre' => $request->nombre],
-            $request->only(['categoria', 'precio'])
-        );
-
-        $material->addStock($request->stock);
-
-        return redirect()->route('materiales.index')->with('success', 'Material creado o actualizado exitosamente.');
+        Material::create($request->all());
+        return redirect()->route('materiales.index')->with('success', 'Material creado exitosamente.');
     }
 
     public function show(Material $material)
@@ -56,43 +49,33 @@ class MaterialController extends Controller
         return view('materiales.show', compact('material'));
     }
 
-    public function edit(Material $material)
+    public function edit(string $id)
     {
+        $material = Material::findOrFail($id);
         $this->authorize('update', $material);
         return view('materiales.edit', compact('material'));
     }
 
-    public function update(Request $request, Material $material)
+    public function update(Request $request, string $id)
     {
+        $material = Material::find($id);
         $this->authorize('update', $material);
         $request->validate([
             'nombre' => 'required|string|max:255',
             'categoria' => 'nullable|string|max:255',
+            'stock' => 'required|integer|min:0',
             'precio' => 'required|numeric|min:0',
         ]);
 
-        $material->update($request->only(['nombre', 'categoria', 'precio']));
-
+        $material->update($request->all());
         return redirect()->route('materiales.index')->with('success', 'Material actualizado exitosamente.');
     }
 
-    public function destroy(Material $material)
+    public function destroy($id)
     {
+        $material = Material::find($id);
         $this->authorize('delete', $material);
         $material->delete();
-
         return redirect()->route('materiales.index')->with('success', 'Material eliminado exitosamente.');
-    }
-
-    public function addStock(Request $request, Material $material)
-    {
-        $this->authorize('update', $material);
-        $request->validate([
-            'stock' => 'required|integer|min:0',
-        ]);
-
-        $material->addStock($request->stock);
-
-        return redirect()->route('materiales.show', $material)->with('success', 'Stock agregado exitosamente.');
     }
 }

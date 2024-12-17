@@ -25,15 +25,4 @@ class Material extends Model
             $material->codigo_material = 'MAT-' . str_pad(Material::max('id') + 1, 4, '0', STR_PAD_LEFT);
         });
     }
-
-    public function batches()
-    {
-        return $this->hasMany(MaterialBatch::class);
-    }
-
-    public function addStock($cantidad)
-    {
-        $this->batches()->create(['cantidad' => $cantidad]);
-        $this->increment('stock', $cantidad);
-    }
 }
