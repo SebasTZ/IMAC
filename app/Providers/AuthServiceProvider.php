@@ -23,7 +23,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Cliente::class => ClientePolicy::class,
         Pedido::class => PedidoPolicy::class,
-        Material::class => MaterialPolicy::class,
+            // Material::class => MaterialPolicy::class,
         Trabajo::class => TrabajoPolicy::class,
     ];
 
