@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('estado', 50);
             $table->string('material_purpose');
             $table->boolean('material_requested');
+            $table->foreignId('entrega_usuario_id')->nullable()->constrained('users');
+            $table->foreignId('recepcion_usuario_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

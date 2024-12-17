@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Trabajo;
 use App\Models\Cliente;
+use App\Models\User; // Add this line
 use Illuminate\Http\Request;
 use App\Exports\TrabajosExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -24,7 +25,8 @@ class TrabajoController extends Controller
     public function create()
     {
         $clientes = Cliente::all();
-        return view('trabajos.create', compact('clientes'));
+        $usuarios = User::all(); // Add this line
+        return view('trabajos.create', compact('clientes', 'usuarios')); // Update this line
     }
 
     public function store(Request $request)
@@ -37,6 +39,7 @@ class TrabajoController extends Controller
             'tipo_comprobante' => 'required|string|max:50',
             'material_purpose' => 'required|string|max:255',
             'material_received' => 'required|boolean',
+            'trabajo_usuario_id' => 'required|exists:users,id', // Add this line
         ]);
 
         Trabajo::create($request->all());
@@ -51,7 +54,8 @@ class TrabajoController extends Controller
     public function edit(Trabajo $trabajo)
     {
         $clientes = Cliente::all();
-        return view('trabajos.edit', compact('trabajo', 'clientes'));
+        $usuarios = User::all(); // Add this line
+        return view('trabajos.edit', compact('trabajo', 'clientes', 'usuarios')); // Update this line
     }
 
     public function update(Request $request, Trabajo $trabajo)
@@ -64,6 +68,7 @@ class TrabajoController extends Controller
             'tipo_comprobante' => 'required|string|max:50',
             'material_purpose' => 'required|string|max:255',
             'material_received' => 'required|boolean',
+            'trabajo_usuario_id' => 'required|exists:users,id', // Add this line
         ]);
 
         $trabajo->update($request->all());

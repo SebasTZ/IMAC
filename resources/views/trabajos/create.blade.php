@@ -54,6 +54,14 @@
                             <option value="0">No</option>
                         </select>
                     </div>
+                    <div class="mb-4">
+                        <label for="trabajo_usuario_id">Usuario que realiza el trabajo</label>
+                        <select id="trabajo_usuario_id" name="trabajo_usuario_id" required>
+                            @foreach ($usuarios as $usuario)
+                                <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="btn">Guardar Trabajo</button>
                 </form>
             </div>

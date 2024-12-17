@@ -14,10 +14,20 @@ class Pedido extends Model
         'estado',
         'material_purpose',
         'material_requested',
+        'entrega_usuario_id', // Add this line
+        'recepcion_usuario_id', // Add this line
     ];
 
     public function material()
     {
         return $this->belongsTo(Material::class);
+    }
+    public function entregaUsuario()
+    {
+        return $this->belongsTo(User::class, 'entrega_usuario_id');
+    }
+    public function recepcionUsuario()
+    {
+        return $this->belongsTo(User::class, 'recepcion_usuario_id');
     }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('material_purpose');
             $table->boolean('material_received');
             $table->string('tipo_comprobante');
+            $table->foreignId('trabajo_usuario_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

@@ -1,3 +1,4 @@
+/resources/views/trabajos/edit.blade.php
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -53,6 +54,14 @@
                         <select id="material_received" name="material_received" required>
                             <option value="1" {{ $trabajo->material_received ? 'selected' : '' }}>Sí</option>
                             <option value="0" {{ !$trabajo->material_received ? 'selected' : '' }}>No</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="trabajo_usuario_id">Usuario que realiza el trabajo</label>
+                        <select id="trabajo_usuario_id" name="trabajo_usuario_id" required>
+                            @foreach ($usuarios as $usuario)
+                                <option value="{{ $usuario->id }}" {{ $trabajo->trabajo_usuario_id == $usuario->id ? 'selected' : '' }}>{{ $usuario->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <button type="submit" class="btn">Actualizar Trabajo</button>

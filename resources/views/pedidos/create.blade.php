@@ -37,6 +37,22 @@
                             <option value="0">No</option>
                         </select>
                     </div>
+                    <div class="mb-4">
+                        <label for="entrega_usuario_id">Usuario que entrega el material</label>
+                        <select id="entrega_usuario_id" name="entrega_usuario_id" required>
+                            @foreach ($usuarios as $usuario)
+                                <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="recepcion_usuario_id">Usuario que recibe el material</label>
+                        <select id="recepcion_usuario_id" name="recepcion_usuario_id" required>
+                            @foreach ($usuarios as $usuario)
+                                <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="btn">Guardar Pedido</button>
                 </form>
             </div>

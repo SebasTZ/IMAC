@@ -24,6 +24,7 @@
                             <th class="px-4 py-2 border">Descripción</th>
                             <th class="px-4 py-2 border">Estado</th>
                             <th class="px-4 py-2 border">Costo</th>
+                            <th class="px-4 py-2 border">Usuario que realiza el trabajo</th>
                             <th class="px-4 py-2 border">Acciones</th>
                         </tr>
                     </thead>
@@ -44,6 +45,7 @@
                                     </span>
                                 </td>
                                 <td class="border px-4 py-2">{{ number_format($trabajo->costo, 2) }}</td>
+                                <td class="border px-4 py-2">{{ $trabajo->trabajoUsuario->name }}</td>
                                 <td class="border px-4 py-2 text-center">
                                     <a href="{{ route('trabajos.show', $trabajo->id) }}" class="text-blue-500 hover:underline">Ver</a>
 

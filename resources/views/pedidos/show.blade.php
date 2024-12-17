@@ -1,5 +1,3 @@
-{{-- resources/views/pedidos/show.blade.php --}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -25,6 +23,14 @@
                 <div class="mb-4">
                     <label class="block text-gray-700">Material Solicitado:</label>
                     <p>{{ $pedido->material_requested ? 'Sí' : 'No' }}</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Usuario que entrega el material:</label>
+                    <p>{{ $pedido->entregaUsuario->name }}</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Usuario que recibe el material:</label>
+                    <p>{{ $pedido->recepcionUsuario->name }}</p>
                 </div>
                 <a href="{{ route('pedidos.index') }}" class="btn btn-primary">Volver a la lista</a>
             </div>

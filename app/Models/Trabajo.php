@@ -17,10 +17,15 @@ class Trabajo extends Model
         'material_purpose',
         'material_received',
         'tipo_comprobante',
+        'trabajo_usuario_id', // Add this line
     ];
 
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);
+    }
+    public function trabajoUsuario()
+    {
+        return $this->belongsTo(User::class, 'trabajo_usuario_id');
     }
 }

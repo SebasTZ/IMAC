@@ -28,6 +28,8 @@ class PedidosExport implements FromCollection, WithHeadings, WithMapping
             'Estado',
             'Propósito del Material',
             'Material Solicitado',
+            'Usuario que entrega el material',
+            'Usuario que recibe el material',
             'Fecha de Creación',
             'Fecha de Actualización',
         ];
@@ -44,6 +46,8 @@ class PedidosExport implements FromCollection, WithHeadings, WithMapping
             $pedido->estado,
             $pedido->material_purpose,
             $pedido->material_requested ? 'Sí' : 'No',
+            $pedido->entregaUsuario->name,
+            $pedido->recepcionUsuario->name,
             $pedido->created_at->format('Y-m-d H:i:s'),
             $pedido->updated_at->format('Y-m-d H:i:s'),
         ];

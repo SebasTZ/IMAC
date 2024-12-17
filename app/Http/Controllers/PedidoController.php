@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use App\Models\Material;
+use App\Models\User; // Add this line
 use Illuminate\Http\Request;
 use App\Exports\PedidosExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -27,7 +28,8 @@ class PedidoController extends Controller
     public function create()
     {
         $materiales = Material::all();
-        return view('pedidos.create', compact('materiales'));
+        $usuarios = User::all(); // Add this line
+        return view('pedidos.create', compact('materiales', 'usuarios')); // Update this line
     }
 
     public function store(Request $request)
@@ -37,6 +39,8 @@ class PedidoController extends Controller
             'estado' => 'required|string|max:50',
             'material_purpose' => 'required|string|max:255',
             'material_requested' => 'required|boolean',
+            'entrega_usuario_id' => 'required|exists:users,id', // Add this line
+            'recepcion_usuario_id' => 'required|exists:users,id', // Add this line
         ]);
 
         $pedido = Pedido::create($request->all());
@@ -59,7 +63,8 @@ class PedidoController extends Controller
     public function edit(Pedido $pedido)
     {
         $materiales = Material::all();
-        return view('pedidos.edit', compact('pedido', 'materiales'));
+        $usuarios = User::all(); // Add this line
+        return view('pedidos.edit', compact('pedido', 'materiales', 'usuarios')); // Update this line
     }
 
     public function update(Request $request, Pedido $pedido)
@@ -69,6 +74,8 @@ class PedidoController extends Controller
             'estado' => 'required|string|max:50',
             'material_purpose' => 'required|string|max:255',
             'material_requested' => 'required|boolean',
+            'entrega_usuario_id' => 'required|exists:users,id', // Add this line
+            'recepcion_usuario_id' => 'required|exists:users,id', // Add this line
         ]);
 
         $pedido->update($request->all());
@@ -94,4 +101,4 @@ class PedidoController extends Controller
         $this->authorize('report', Pedido::class);
         return Excel::download(new PedidosExport, 'pedidos.xlsx');
     }
-}   
+}
