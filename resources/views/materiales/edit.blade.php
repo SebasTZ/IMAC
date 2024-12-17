@@ -20,14 +20,18 @@
                         <input type="text" id="categoria" name="categoria" value="{{ $material->categoria }}">
                     </div>
                     <div class="mb-4">
-                        <label for="stock">Cantidad</label>
-                        <input type="number" id="stock" name="stock" value="{{ $material->stock }}" required min="0">
-                    </div>
-                    <div class="mb-4">
                         <label for="precio">Precio</label>
-                        <input type="number" step="0.01" id="precio" name="precio" value="{{ $material->precio }}" required min="0">
+                        <input type="number" step="0.01" id="precio" name="precio" value="{{ $material->precio }}" required>
                     </div>
                     <button type="submit" class="btn">Actualizar Material</button>
+                </form>
+                <form action="{{ route('materiales.addStock', $material->id) }}" method="POST" class="mt-4">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="stock">Agregar Stock</label>
+                        <input type="number" id="stock" name="stock" required>
+                    </div>
+                    <button type="submit" class="btn">Agregar Stock</button>
                 </form>
             </div>
         </div>

@@ -20,11 +20,11 @@
                     </div>
                     <div class="mb-4">
                         <label for="stock">Cantidad</label>
-                        <input type="number" id="stock" name="stock" required min="0">
+                        <input type="number" id="stock" name="stock" required>
                     </div>
                     <div class="mb-4">
                         <label for="precio">Precio</label>
-                        <input type="number" step="0.01" id="precio" name="precio" required min="0">
+                        <input type="number" step="0.01" id="precio" name="precio" required>
                     </div>
                     <button type="submit" class="btn">Guardar Material</button>
                 </form>
