@@ -75,7 +75,6 @@ Route::middleware([
 
 
     // Rutas generales
-    Route::get('materiales/{material}', [MaterialController::class, 'show'])->name('materiales.show');
     Route::get('materiales/{material}/stock_entries/create', [StockEntryController::class, 'create'])->name('stock_entries.create');
     Route::post('materiales/{material}/stock_entries', [StockEntryController::class, 'store'])->name('stock_entries.store');
     Route::get('pedidos', [PedidoController::class, 'index'])->name('pedidos.index');

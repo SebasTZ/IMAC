@@ -43,9 +43,11 @@ class MaterialController extends Controller
         return redirect()->route('materiales.index')->with('success', 'Material creado exitosamente.');
     }
 
-    public function show(Material $material)
+    public function show($id)
     {
+        $material = Material::findOrFail($id);
         $this->authorize('view', $material);
+        \Log::info('MaterialController@show called for material: ' . $material->id);
         return view('materiales.show', compact('material'));
     }
 
