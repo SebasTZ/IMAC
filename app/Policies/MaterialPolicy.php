@@ -41,4 +41,9 @@ class MaterialPolicy
     {
         return $user->can('eliminar materiales');
     }
+
+    public function addStock(User $user)
+    {
+        return $user->can('agregar stock');
+    }
 }

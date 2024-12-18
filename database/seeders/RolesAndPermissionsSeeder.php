@@ -16,7 +16,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $permissions = [
             'ver clientes', 'crear clientes', 'editar clientes', 'eliminar clientes',
             'ver pedidos', 'crear pedidos', 'editar pedidos', 'eliminar pedidos', 'reporte pedidos',
-            'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales',
+            'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales', 'agregar stock',
             'ver trabajos', 'crear trabajos', 'editar trabajos', 'eliminar trabajos', 'reporte trabajos',
             'ver usuarios', 'crear usuarios', 'editar usuarios', 'eliminar usuarios',
         ];
@@ -32,7 +32,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'Ventas' => [
                 'ver clientes', 'crear clientes', 'editar clientes',
                 'ver pedidos', 'editar pedidos', 'reporte pedidos',
-                'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales',
+                'ver materiales', 'crear materiales', 'editar materiales', 'eliminar materiales', 'agregar stock',
                 'ver trabajos', 'editar trabajos', 'reporte trabajos'
             ],
             'Taller' => [

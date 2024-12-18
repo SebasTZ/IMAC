@@ -13,40 +13,45 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <div class="mb-4">
-                    @can('crear clientes')
-                        <a href="{{ route('clientes.create') }}" class="btn btn-primary">Agregar Nuevo Cliente</a>
-                    @endcan
-                </div>
-                <table class="table-auto w-full">
+
+                @can('crear clientes')
+                    <a href="{{ route('clientes.create') }}" class="btn mb-3">Agregar Cliente</a>
+                @endcan
+
+                <form method="GET" action="{{ route('clientes.index') }}" class="mb-4">
+                    <input type="text" name="search" placeholder="Buscar cliente..." class="form-input w-full" value="{{ request('search') }}">
+                    <button type="submit" class="btn mt-2">Buscar</button>
+                </form>
+
+                <table class="table-auto w-full border-collapse">
                     <thead>
-                        <tr>
-                            <th class="px-4 py-2">ID</th>
-                            <th class="px-4 py-2">Nombre</th>
-                            <th class="px-4 py-2">Teléfono</th>
-                            <th class="px-4 py-2">Email</th>
-                            <th class="px-4 py-2">Tipo de Documento</th>
-                            <th class="px-4 py-2">Número de Documento</th>
-                            <th class="px-4 py-2">Acciones</th>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="px-4 py-2 border">ID</th>
+                            <th class="px-4 py-2 border">Nombre</th>
+                            <th class="px-4 py-2 border">Correo</th>
+                            <th class="px-4 py-2 border">Teléfono</th>
+                            <th class="px-4 py-2 border">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-gray-700 text-sm font-light">
                         @foreach ($clientes as $cliente)
-                            <tr>
-                                <td class="border px-4 py-2">{{ $cliente->id }}</td>
+                            <tr class="hover:bg-gray-100">
+                                <td class="border px-4 py-2 text-center">{{ $cliente->id }}</td>
                                 <td class="border px-4 py-2">{{ $cliente->nombre }}</td>
+                                <td class="border px-4 py-2">{{ $cliente->correo }}</td>
                                 <td class="border px-4 py-2">{{ $cliente->telefono }}</td>
-                                <td class="border px-4 py-2">{{ $cliente->email }}</td>
-                                <td class="border px-4 py-2">{{ $cliente->tipo_documento }}</td>
-                                <td class="border px-4 py-2">{{ $cliente->numero_documento }}</td>
-                                <td class="border px-4 py-2">
-                                    <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-info">Ver</a>
-                                    <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-primary">Editar</a>
+                                <td class="border px-4 py-2 text-center">
+                                    <a href="{{ route('clientes.show', $cliente->id) }}" class="btn">Ver</a>
+
+                                    @can('editar clientes')
+                                        <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-success ml-2">Editar</a>
+                                    @endcan
+
                                     @can('eliminar clientes')
-                                        <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" class="inline-block">
+                                        <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este cliente?')">Eliminar</button>
+                                            <button type="submit" class="btn btn-danger ml-2">Eliminar</button>
                                         </form>
                                     @endcan
                                 </td>
@@ -54,6 +59,10 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                @if($clientes->isEmpty())
+                    <p class="text-center mt-4">No hay clientes disponibles.</p>
+                @endif
             </div>
         </div>
     </div>

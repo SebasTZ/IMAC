@@ -7,6 +7,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\TrabajoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\StockEntryController;  
 
 // Ruta principal redirige al login
 Route::get('/', function () {
@@ -74,6 +75,9 @@ Route::middleware([
 
 
     // Rutas generales
+    Route::get('materiales/{material}', [MaterialController::class, 'show'])->name('materiales.show');
+    Route::get('materiales/{material}/stock_entries/create', [StockEntryController::class, 'create'])->name('stock_entries.create');
+    Route::post('materiales/{material}/stock_entries', [StockEntryController::class, 'store'])->name('stock_entries.store');
     Route::get('pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
     Route::get('trabajos', [TrabajoController::class, 'index'])->name('trabajos.index');
 });

@@ -8,6 +8,12 @@
     <div class="py-12 bg-gray-100">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="card">
+                @if (session('success'))
+                    <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
                 @can('crear trabajos')
                     <a href="{{ route('trabajos.create') }}" class="btn mb-3">Agregar Trabajo</a>
                 @endcan
@@ -47,17 +53,17 @@
                                 <td class="border px-4 py-2">{{ number_format($trabajo->costo, 2) }}</td>
                                 <td class="border px-4 py-2">{{ $trabajo->trabajoUsuario->name }}</td>
                                 <td class="border px-4 py-2 text-center">
-                                    <a href="{{ route('trabajos.show', $trabajo->id) }}" class="text-blue-500 hover:underline">Ver</a>
+                                    <a href="{{ route('trabajos.show', $trabajo->id) }}" class="btn">Ver</a>
 
                                     @can('editar trabajos')
-                                        <a href="{{ route('trabajos.edit', $trabajo->id) }}" class="text-yellow-500 hover:underline ml-2">Editar</a>
+                                        <a href="{{ route('trabajos.edit', $trabajo->id) }}" class="btn btn-success ml-2">Editar</a>
                                     @endcan
 
                                     @can('eliminar trabajos')
                                         <form action="{{ route('trabajos.destroy', $trabajo->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:underline ml-2">Eliminar</button>
+                                            <button type="submit" class="btn btn-danger ml-2">Eliminar</button>
                                         </form>
                                     @endcan
                                 </td>
