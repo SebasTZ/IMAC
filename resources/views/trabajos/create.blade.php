@@ -62,6 +62,36 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-4">
+                        <label for="fecha_ingreso">Fecha de Ingreso</label>
+                        <input type="date" id="fecha_ingreso" name="fecha_ingreso" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="fecha_culminacion">Fecha de Culminación</label>
+                        <input type="date" id="fecha_culminacion" name="fecha_culminacion">
+                    </div>
+                    <div class="mb-4">
+                        <label for="observaciones">Observaciones</label>
+                        <select id="observaciones" name="observaciones" required>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="mb-4" id="observacion_texto_container" style="display: none;">
+                        <label for="observacion_texto">Texto de Observación</label>
+                        <textarea id="observacion_texto" name="observacion_texto"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="conformidad_cliente">Conformidad del Cliente</label>
+                        <select id="conformidad_cliente" name="conformidad_cliente" required>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="mb-4" id="conformidad_texto_container" style="display: none;">
+                        <label for="conformidad_texto">Texto de Conformidad</label>
+                        <textarea id="conformidad_texto" name="conformidad_texto"></textarea>
+                    </div>
                     <button type="submit" class="btn">Guardar Trabajo</button>
                 </form>
             </div>

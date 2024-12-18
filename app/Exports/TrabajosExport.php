@@ -32,6 +32,12 @@ class TrabajosExport implements FromCollection, WithHeadings, WithMapping
             'Material Recibido',
             'Tipo de Comprobante',
             'Usuario que realiza el trabajo',
+            'Fecha de Ingreso', 
+            'Fecha de Culminación', 
+            'Observaciones', 
+            'Texto de Observación', 
+            'Conformidad del Cliente', 
+            'Texto de Conformidad',
             'Fecha de Creación',
             'Fecha de Actualización',
         ];
@@ -52,6 +58,12 @@ class TrabajosExport implements FromCollection, WithHeadings, WithMapping
             $trabajo->material_received ? 'Sí' : 'No',
             $trabajo->tipo_comprobante,
             $trabajo->trabajoUsuario->name,
+            $trabajo->fecha_ingreso->format('Y-m-d'),
+            $trabajo->fecha_culminacion ? $trabajo->fecha_culminacion->format('Y-m-d') : 'N/A', // Add this line
+            $trabajo->observaciones ? 'Sí' : 'No', 
+            $trabajo->observacion_texto, 
+            $trabajo->conformidad_cliente ? 'Sí' : 'No', 
+            $trabajo->conformidad_texto,         
             $trabajo->created_at->format('Y-m-d H:i:s'),
             $trabajo->updated_at->format('Y-m-d H:i:s'),
         ];

@@ -1,4 +1,3 @@
-/resources/views/trabajos/edit.blade.php
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -63,6 +62,36 @@
                                 <option value="{{ $usuario->id }}" {{ $trabajo->trabajo_usuario_id == $usuario->id ? 'selected' : '' }}>{{ $usuario->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="fecha_ingreso">Fecha de Ingreso</label>
+                        <input type="date" id="fecha_ingreso" name="fecha_ingreso" value="{{ $trabajo->fecha_ingreso }}" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="fecha_culminacion">Fecha de Culminación</label>
+                        <input type="date" id="fecha_culminacion" name="fecha_culminacion" value="{{ $trabajo->fecha_culminacion }}">
+                    </div>
+                    <div class="mb-4">
+                        <label for="observaciones">Observaciones</label>
+                        <select id="observaciones" name="observaciones" required>
+                            <option value="1" {{ $trabajo->observaciones ? 'selected' : '' }}>Sí</option>
+                            <option value="0" {{ !$trabajo->observaciones ? 'selected' : '' }}>No</option>
+                        </select>
+                    </div>
+                    <div class="mb-4" id="observacion_texto_container" style="{{ $trabajo->observaciones ? '' : 'display: none;' }}">
+                        <label for="observacion_texto">Texto de Observación</label>
+                        <textarea id="observacion_texto" name="observacion_texto">{{ $trabajo->observacion_texto }}</textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="conformidad_cliente">Conformidad del Cliente</label>
+                        <select id="conformidad_cliente" name="conformidad_cliente" required>
+                            <option value="1" {{ $trabajo->conformidad_cliente ? 'selected' : '' }}>Sí</option>
+                            <option value="0" {{ !$trabajo->conformidad_cliente ? 'selected' : '' }}>No</option>
+                        </select>
+                    </div>
+                    <div class="mb-4" id="conformidad_texto_container" style="{{ !$trabajo->conformidad_cliente ? '' : 'display: none;' }}">
+                        <label for="conformidad_texto">Texto de Conformidad</label>
+                        <textarea id="conformidad_texto" name="conformidad_texto">{{ $trabajo->conformidad_texto }}</textarea>
                     </div>
                     <button type="submit" class="btn">Actualizar Trabajo</button>
                 </form>

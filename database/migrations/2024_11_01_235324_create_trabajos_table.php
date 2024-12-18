@@ -21,6 +21,12 @@ return new class extends Migration
             $table->boolean('material_received');
             $table->string('tipo_comprobante');
             $table->foreignId('trabajo_usuario_id')->nullable()->constrained('users');
+            $table->date('fecha_ingreso'); // Add this line
+            $table->date('fecha_culminacion')->nullable(); // Add this line
+            $table->boolean('observaciones')->default(false); // Add this line
+            $table->text('observacion_texto')->nullable(); // Add this line
+            $table->boolean('conformidad_cliente')->default(true); // Add this line
+            $table->text('conformidad_texto')->nullable(); // Add this line
             $table->timestamps();
         });
     }

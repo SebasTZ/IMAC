@@ -39,7 +39,13 @@ class TrabajoController extends Controller
             'tipo_comprobante' => 'required|string|max:50',
             'material_purpose' => 'required|string|max:255',
             'material_received' => 'required|boolean',
-            'trabajo_usuario_id' => 'required|exists:users,id', // Add this line
+            'trabajo_usuario_id' => 'required|exists:users,id',
+            'fecha_ingreso' => 'required|date', // Add this line
+            'fecha_culminacion' => 'nullable|date', // Add this line
+            'observaciones' => 'required|boolean', // Add this line
+            'observacion_texto' => 'nullable|string', // Add this line
+            'conformidad_cliente' => 'required|boolean', // Add this line
+            'conformidad_texto' => 'nullable|string', // Add this line
         ]);
 
         Trabajo::create($request->all());
@@ -69,6 +75,12 @@ class TrabajoController extends Controller
             'material_purpose' => 'required|string|max:255',
             'material_received' => 'required|boolean',
             'trabajo_usuario_id' => 'required|exists:users,id', // Add this line
+            'fecha_ingreso' => 'required|date', // Add this line
+            'fecha_culminacion' => 'nullable|date', // Add this line
+            'observaciones' => 'required|boolean', // Add this line
+            'observacion_texto' => 'nullable|string', // Add this line
+            'conformidad_cliente' => 'required|boolean', // Add this line
+            'conformidad_texto' => 'nullable|string', // Add this line
         ]);
 
         $trabajo->update($request->all());

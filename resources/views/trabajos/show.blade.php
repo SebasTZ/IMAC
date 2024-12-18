@@ -16,6 +16,16 @@
                 <p><strong>Propósito del Material:</strong> {{ $trabajo->material_purpose }}</p>
                 <p><strong>Material Recibido:</strong> {{ $trabajo->material_received ? 'Sí' : 'No' }}</p>
                 <p><strong>Usuario que realiza el trabajo:</strong> {{ $trabajo->trabajoUsuario->name }}</p>
+                <p><strong>Fecha de Ingreso:</strong> {{ $trabajo->fecha_ingreso->format('Y-m-d') }}</p>
+                <p><strong>Fecha de Culminación:</strong> {{ $trabajo->fecha_culminacion ? $trabajo->fecha_culminacion->format('Y-m-d') : 'N/A' }}</p>
+                <p><strong>Observaciones:</strong> {{ $trabajo->observaciones ? 'Sí' : 'No' }}</p>
+                @if ($trabajo->observaciones)
+                    <p><strong>Texto de Observación:</strong> {{ $trabajo->observacion_texto }}</p>
+                @endif
+                <p><strong>Conformidad del Cliente:</strong> {{ $trabajo->conformidad_cliente ? 'Sí' : 'No' }}</p>
+                @if (!$trabajo->conformidad_cliente)
+                    <p><strong>Texto de Conformidad:</strong> {{ $trabajo->conformidad_texto }}</p>
+                @endif
                 <a href="{{ route('trabajos.index') }}" class="btn">Volver a la lista</a>
             </div>
         </div>

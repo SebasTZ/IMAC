@@ -31,6 +31,10 @@
                             <th class="px-4 py-2 border">Estado</th>
                             <th class="px-4 py-2 border">Costo</th>
                             <th class="px-4 py-2 border">Usuario que realiza el trabajo</th>
+                            <th class="px-4 py-2 border">Fecha de Ingreso</th>
+                            <th class="px-4 py-2 border">Fecha de Culminación</th>
+                            <th class="px-4 py-2 border">Observaciones</th>
+                            <th class="px-4 py-2 border">Conformidad del Cliente</th>
                             <th class="px-4 py-2 border">Acciones</th>
                         </tr>
                     </thead>
@@ -52,6 +56,10 @@
                                 </td>
                                 <td class="border px-4 py-2">{{ number_format($trabajo->costo, 2) }}</td>
                                 <td class="border px-4 py-2">{{ $trabajo->trabajoUsuario->name }}</td>
+                                <td class="border px-4 py-2">{{ $trabajo->fecha_ingreso->format('Y-m-d') }}</td>
+                                <td class="border px-4 py-2">{{ $trabajo->fecha_culminacion ? $trabajo->fecha_culminacion->format('Y-m-d') : 'N/A' }}</td>
+                                <td class="border px-4 py-2">{{ $trabajo->observaciones ? 'Sí' : 'No' }}</td>
+                                <td class="border px-4 py-2">{{ $trabajo->conformidad_cliente ? 'Sí' : 'No' }}</td>
                                 <td class="border px-4 py-2 text-center">
                                     <a href="{{ route('trabajos.show', $trabajo->id) }}" class="btn">Ver</a>
 
