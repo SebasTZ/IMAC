@@ -32,6 +32,24 @@
                     <label class="block text-gray-700">Usuario que recibe el material:</label>
                     <p>{{ $pedido->recepcionUsuario->name }}</p>
                 </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Fecha del Pedido:</label>
+                    <p>{{ $pedido->fecha_pedido }}</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Fecha de la Entrega:</label>
+                    <p>{{ $pedido->fecha_entrega }}</p>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Observaciones de la Entrega:</label>
+                    <p>{{ $pedido->observaciones_entrega ? 'Sí' : 'No' }}</p>
+                </div>
+                @if ($pedido->observaciones_entrega)
+                    <div class="mb-4">
+                        <label class="block text-gray-700">Observaciones:</label>
+                        <p>{{ $pedido->observaciones_texto }}</p>
+                    </div>
+                @endif
                 <a href="{{ route('pedidos.index') }}" class="btn btn-primary">Volver a la lista</a>
             </div>
         </div>

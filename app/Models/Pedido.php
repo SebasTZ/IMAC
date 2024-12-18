@@ -14,8 +14,12 @@ class Pedido extends Model
         'estado',
         'material_purpose',
         'material_requested',
-        'entrega_usuario_id', // Add this line
-        'recepcion_usuario_id', // Add this line
+        'entrega_usuario_id',
+        'recepcion_usuario_id',
+        'fecha_pedido',
+        'fecha_entrega',
+        'observaciones_entrega',
+        'observaciones_texto',
     ];
 
     public function material()

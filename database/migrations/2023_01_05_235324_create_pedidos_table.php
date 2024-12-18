@@ -19,6 +19,10 @@ return new class extends Migration
             $table->boolean('material_requested');
             $table->foreignId('entrega_usuario_id')->nullable()->constrained('users');
             $table->foreignId('recepcion_usuario_id')->nullable()->constrained('users');
+            $table->date('fecha_pedido');
+            $table->date('fecha_entrega')->nullable();
+            $table->boolean('observaciones_entrega');
+            $table->text('observaciones_texto')->nullable();
             $table->timestamps();
         });
     }

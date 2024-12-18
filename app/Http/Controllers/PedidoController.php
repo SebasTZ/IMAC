@@ -39,8 +39,12 @@ class PedidoController extends Controller
             'estado' => 'required|string|max:50',
             'material_purpose' => 'required|string|max:255',
             'material_requested' => 'required|boolean',
-            'entrega_usuario_id' => 'required|exists:users,id', // Add this line
-            'recepcion_usuario_id' => 'required|exists:users,id', // Add this line
+            'entrega_usuario_id' => 'required|exists:users,id',
+            'recepcion_usuario_id' => 'required|exists:users,id',
+            'fecha_pedido' => 'required|date', 
+            'fecha_entrega' => 'nullable|date', 
+            'observaciones_entrega' => 'required|boolean', 
+            'observaciones_texto' => 'nullable|string',   
         ]);
 
         $pedido = Pedido::create($request->all());
@@ -74,8 +78,12 @@ class PedidoController extends Controller
             'estado' => 'required|string|max:50',
             'material_purpose' => 'required|string|max:255',
             'material_requested' => 'required|boolean',
-            'entrega_usuario_id' => 'required|exists:users,id', // Add this line
-            'recepcion_usuario_id' => 'required|exists:users,id', // Add this line
+            'entrega_usuario_id' => 'required|exists:users,id',
+            'recepcion_usuario_id' => 'required|exists:users,id',
+            'fecha_pedido' => 'required|date',
+            'fecha_entrega' => 'nullable|date',
+            'observaciones_entrega' => 'required|boolean',
+            'observaciones_texto' => 'nullable|string',
         ]);
 
         $pedido->update($request->all());

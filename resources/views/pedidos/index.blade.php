@@ -31,6 +31,9 @@
                             <th class="px-4 py-2">Material Solicitado</th>
                             <th class="px-4 py-2">Usuario que entrega el material</th>
                             <th class="px-4 py-2">Usuario que recibe el material</th>
+                            <th class="px-4 py-2">Fecha del Pedido</th>
+                            <th class="px-4 py-2">Fecha de la Entrega</th>
+                            <th class="px-4 py-2">Observaciones de la Entrega</th>
                             <th class="px-4 py-2">Acciones</th>
                         </tr>
                     </thead>
@@ -53,6 +56,9 @@
                                 <td class="border px-4 py-2">{{ $pedido->material_requested ? 'Sí' : 'No' }}</td>
                                 <td class="border px-4 py-2">{{ $pedido->entregaUsuario->name }}</td>
                                 <td class="border px-4 py-2">{{ $pedido->recepcionUsuario->name }}</td>
+                                <td class="border px-4 py-2">{{ $pedido->fecha_pedido }}</td>
+                                <td class="border px-4 py-2">{{ $pedido->fecha_entrega }}</td>
+                                <td class="border px-4 py-2">{{ $pedido->observaciones_entrega ? 'Sí' : 'No' }}</td>
                                 <td class="border px-4 py-2">
                                     <a href="{{ route('pedidos.show', $pedido) }}" class="btn">Ver</a>
                                     <a href="{{ route('pedidos.edit', $pedido) }}" class="btn btn-success ml-2">Editar</a>
